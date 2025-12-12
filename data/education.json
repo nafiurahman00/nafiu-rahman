@@ -1,0 +1,24 @@
+[
+  {
+    "institution": "Bangladesh University of Engineering & Technology (BUET)",
+    "location": "Dhaka",
+    "degree": "B.Sc. in Computer Science & Engineering",
+    "details": "CGPA: 3.81 / 4.00 (Final year: 3.94 / 4.00)",
+    "year": "Feb 2020 – Mar 2025",
+    "coursework": "Data Structures & Algorithms, Object Oriented Programming, Software Engineering, Database Systems, Numerical Methods, Machine Learning"
+  },
+  {
+    "institution": "Notre Dame College",
+    "location": "Dhaka",
+    "degree": "Higher Secondary Certificate",
+    "details": "GPA: 5.00 / 5.00",
+    "year": "Jan 2017 – Jan 2019"
+  },
+  {
+    "institution": "Bir Shrestha Noor Mohammad Public College",
+    "location": "Dhaka",
+    "degree": "Secondary School Certificate",
+    "details": "GPA: 5.00 / 5.00",
+    "year": "Jan 2009 – Dec 2016"
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "title": "Lecturer",
+    "company": "BRAC University",
+    "department": "Department of CSE",
+    "location": "Dhaka",
+    "duration": "July 2025 – Present",
+    "startDate": "July 2025",
+    "endDate": "Present",
+    "type": "Full-time",
+    "description": "Teaching undergraduate courses including Numerical Methods and Software Engineering. I design course materials, assignments, and practical labs with an emphasis on clear, reproducible programming and sound engineering practices.",
+    "coursesTaught": ["Numerical Methods", "Software Engineering"]
+  },
+  {
+    "title": "Research Assistant",
+    "company": "Bangladesh University of Engineering and Technology (BUET)",
+    "department": "Department of CSE",
+    "location": "Dhaka",
+    "duration": "Mar 2025 – June 2025",
+    "startDate": "Mar 2025",
+    "endDate": "June 2025",
+    "type": "Research Position",
+    "description": "Worked on a pipeline to generate Playwright testing scripts automatically from high-level website descriptions and web UI traces. Explored benchmarks and WebUI gyms, prototyped selector generation methods, and evaluated the reliability of generated tests focusing on practical integration with developer workflows."
+  }
+]

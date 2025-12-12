@@ -1,0 +1,12 @@
+{
+  "technicalSkills": {
+    "Data Science & ML": ["Python", "NumPy", "Pandas", "scikit-learn", "PyTorch", "TensorFlow", "Torchvision"],
+    "Databases": ["PostgreSQL", "PL/pgSQL", "MongoDB", "Firebase Firestore"],
+    "Full-Stack": ["Node.js (backend)", "HTML/CSS", "Svelte", "Flutter"],
+    "Languages": ["C/C++", "Python", "Java", "JavaScript / TypeScript", "PHP", "Bash", "Dart"]
+  },
+  "spokenLanguages": [
+    "English (proficient)",
+    "Bengali (native)"
+  ]
+}

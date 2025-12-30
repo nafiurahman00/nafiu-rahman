@@ -34,7 +34,7 @@
     "codelink": "https://github.com/nafiurahman00/IssueGuard",
     "description": "We introduce a tool IssueGuard to detect sensitive information in Github issues prior posting, reducing false positivs leveraging a fine-tuned CodeBERT model, optimized with LRU cache and amp precision for very fast inference. We also did a user study with 50 participants to test the effectiveness of the tool, which expressed satisfactory results.",
     "year": "2025",
-    "status": "Submitted at SANER 2026 Tool Track"
+    "status": "Accepted at SANER 2026 Tool Track"
   },
   {
     "title": "A Survey on Agentic Security: Applications, Threats and Defenses",

@@ -26,7 +26,7 @@
     "codelink": "https://github.com/nafiurahman00/Secret-Breach-Prevention-In-Software-Issue-Reports",
     "description": "We introduce a hybrid LLM-based pipeline for detecting secret leaks in GitHub issue reports, combining regex extraction with contextual classification. Trained on 54,000 instances with 5,800+ verified secrets, fine-tuned open-source models like Qwen and LLaMA achieve up to 94.49% F1 and generalize well to real-world repositories (81.6% F1), highlighting their effectiveness for practical secret detection.",
     "year": "2024",
-    "status": "Submitted at MSR 2026 Technical Track"
+    "status": "Accepted at MSR 2026 Technical Track"
   },
   {
     "title": "ISSUEGUARD: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",

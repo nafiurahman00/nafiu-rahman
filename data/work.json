@@ -2,19 +2,48 @@
   {
     "title": "Lecturer",
     "company": "BRAC University",
-    "department": "Department of CSE",
+    "companyLink": "https://bracu.ac.bd/",
+    "department": "Department of Computer Science and Engineering",
     "location": "Dhaka",
     "duration": "July 2025 – Present",
     "startDate": "July 2025",
     "endDate": "Present",
     "type": "Full-time",
-    "description": "Teaching undergraduate courses including Numerical Methods and Software Engineering. I design course materials, assignments, and practical labs with an emphasis on clear, reproducible programming and sound engineering practices.",
-    "coursesTaught": ["Numerical Methods", "Software Engineering"]
+    "description": "Teaching undergraduate courses including Numerical Methods and Software Engineering.",
+    "courses": [
+      {
+        "code": "CSE330",
+        "name": "Numerical Methods",
+        "type": "Theory, Lab",
+        "semesters": [
+          "Summer 2025",
+          "Fall 2025",
+          "Spring 2026"
+        ]
+      },
+      {
+        "code": "CSE470",
+        "name": "Software Engineering",
+        "type": "Theory",
+        "semesters": [
+          "Summer 2025",
+          "Fall 2025",
+          "Spring 2026"
+        ]
+      }
+    ],
+    "responsibilities": [
+      "Conducting Theory and Lab Classes (Course Load : 12.0 Credits) of each sections having 38-40 students.",
+      "Grading Scripts, Setting Up Questions and Invigilating for Exams.",
+      "Coordinating Lab Courses",
+      "Conducting Administrative Tasks assigned by the Department and the University."
+    ]
   },
   {
     "title": "Research Assistant",
     "company": "Bangladesh University of Engineering and Technology (BUET)",
-    "department": "Department of CSE",
+    "companyLink": "https://buet.ac.bd/",
+    "department": "Department of Computer Science and Engineering",
     "location": "Dhaka",
     "duration": "Mar 2025 – June 2025",
     "startDate": "Mar 2025",

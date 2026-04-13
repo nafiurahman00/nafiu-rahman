@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation",
+    "venue": "MSR 2026",
+    "videoLink": "https://youtu.be/XDxYqU91Cas"
+  },
+  {
+    "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
+    "venue": "FSE 2026 Tool Demo Track",
+    "videoLink": "https://youtu.be/kvbWA8rr9cU"
+  },
+  {
+    "title": "Secret Breach Detection in Source Code with Large Language Models",
+    "venue": "ESEM 2025",
+    "videoLink": "https://drive.google.com/file/d/1PtkiMufGYinZtQ2qRGT-2nPxWKP_ZIMX/view?usp=drive_link",
+    "slidesLink": "https://drive.google.com/file/d/1N8LJl50T6ttlCd_Fol6J8EO92jj0PBhh/view?usp=drive_link"
+  }
+]

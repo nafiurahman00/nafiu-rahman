@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		populateProfile(profile);
 		populateEducation(education);
 		populateResearch(research);
-		populateAppointment(work);
+		populateWorkExperience(work);
 		populateProjects(projects);
 		populateTalks(talks);
 		populateSkills(skills);
@@ -85,7 +85,7 @@ function populateProfile(profile) {
 	linksHtml += '<a href="' + profile.linkedin + '" target="_blank">LinkedIn</a> <br>';
 	linksHtml += '<a href="#Education">Education</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="#Research">Research</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Appointment">Appointment</a> &nbsp/&nbsp ';
+	linksHtml += '<a href="#Work Experience">Work Experience</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="#Technical Skill">Technical Skill</a> <br>';
 	linksHtml += '<a href="#Honors &amp; Awards">Honors &amp; Awards</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="#Projects">Notable Projects</a> &nbsp/&nbsp ';
@@ -217,8 +217,8 @@ function buildPaperItem(paper, index) {
 	return html;
 }
 
-// ==================== APPOINTMENT ====================
-function populateAppointment(work) {
+// ==================== WORK EXPERIENCE ====================
+function populateWorkExperience(work) {
 	var html = '';
 	work.forEach(function(job, idx) {
 		html += '<p align="justify">';
@@ -263,7 +263,7 @@ function populateAppointment(work) {
 			html += '<hr class="section-divider">';
 		}
 	});
-	document.getElementById('appointment-content').innerHTML = html;
+	document.getElementById('work-experience-content').innerHTML = html;
 }
 
 // ==================== PROJECTS ====================

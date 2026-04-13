@@ -2,7 +2,9 @@
 function toggleSection(elementId) {
 	var el = document.getElementById(elementId);
 	if (el) {
-		el.style.display = el.style.display === 'none' ? 'block' : 'none';
+		// Use computed style as fallback when no inline style is set yet
+		var currentDisplay = el.style.display || window.getComputedStyle(el).display;
+		el.style.display = currentDisplay === 'none' ? 'block' : 'none';
 	}
 }
 

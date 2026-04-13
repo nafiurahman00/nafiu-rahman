@@ -23,7 +23,7 @@
     {
       "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
       "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Rifat Shahriyar, Gias Uddin",
-      "venue": "ACM International Conference on the Foundations of Software Engineering (FSE), Tool Demo Track",
+      "venue": "ACM International Conference on the Foundations of Software Engineering (FSE 2026), Tool Demo Track",
       "paperLink": "https://arxiv.org/abs/2602.08072",
       "codeLink": "https://github.com/nafiurahman00/IssueGuard",
       "description": "GitHub and GitLab are widely used collaborative platforms whose issue-tracking systems contain large volumes of unstructured text, including logs, code snippets, and configuration examples. This creates a significant risk of accidental secret exposure, such as API keys and credentials, yet these platforms provide no mechanism to warn users before submission. We present IssueGuard, a tool for real-time detection and prevention of secret leaks in issue reports. Implemented as a Chrome extension, IssueGuard analyzes text as users type and combines regex-based candidate extraction with a fine-tuned CodeBERT model for contextual classification. This approach effectively separates real secrets from false positives and achieves an F1-score of 92.70% on a benchmark dataset, outperforming traditional regex-based scanners. IssueGuard integrates directly into the web interface and continuously analyzes the issue editor, presenting clear visual warnings to help users avoid submitting sensitive data. The source code is publicly available at https://github.com/disa-lab/IssueGuard , and a demonstration video is available at https://youtu.be/kvbWA8rr9cU.",

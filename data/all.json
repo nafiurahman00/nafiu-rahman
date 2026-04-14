@@ -1,0 +1,341 @@
+{
+  "profile": {
+    "name": "Md Nafiu Rahman",
+    "title": "CS Graduate | Bangladesh University of Engineering and Technology",
+    "location": "Dhaka, Bangladesh",
+    "email": "nafiu [dot] rahman [at] gmail [dot] com",
+    "phone": "+88 01933-002218",
+    "googlescholar": "https://scholar.google.com/citations?user=VComsdEAAAAJ&hl=en",
+    "linkedin": "https://www.linkedin.com/in/mdnafiurahman/",
+    "github": "https://github.com/nafiurahman00",
+    "bio": "Hi! I graduated with honors in CSE from BUET in February 2025. I worked as a Research Assistant on the Edge Project at RIC, BUET, then joined BRAC University as a Lecturer. My undergraduate thesis under Dr. Rifat Shahriyar sparked my interest in Software Engineering research. I now focus on the domain of Software Engineering, especially using LLMs for SE related various tasks. My long-term goal is to advance AI4SE to build tools that improve developer productivity and software reliability.",
+    "image": "img/nfu.jpg",
+    "cv": "pdf/Md_Nafiu_Rahman_Resume.pdf",
+    "phdNotice": "Prospective PhD Student! Actively looking for PhD positions starting in Fall 2027.",
+    "researchInterests": [
+      "Software Engineering",
+      "LLM applications in Software Engineering",
+      "Empirical Software Engineering"
+    ],
+    "facultySites": [
+      {
+        "label": "Site I",
+        "url": "https://www.bracu.ac.bd/about/people/md-nafiu-rahman"
+      },
+      {
+        "label": "Site II",
+        "url": "https://cse.sds.bracu.ac.bd/faculty_profile/434/md_nafiu_rahman"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "Bangladesh University of Engineering & Technology (BUET)",
+      "location": "Dhaka",
+      "degree": "B.Sc. in Computer Science & Engineering",
+      "details": "CGPA: 3.81 / 4.00 (Final year: 3.94 / 4.00)",
+      "year": "Feb 2020 – Mar 2025"
+    },
+    {
+      "institution": "Notre Dame College",
+      "location": "Dhaka",
+      "degree": "Higher Secondary Certificate",
+      "details": "GPA: 5.00 / 5.00",
+      "year": "Jan 2017 – Jan 2019"
+    },
+    {
+      "institution": "Bir Shrestha Noor Mohammad Public College",
+      "location": "Dhaka",
+      "degree": "Secondary School Certificate",
+      "details": "GPA: 5.00 / 5.00",
+      "year": "Jan 2015 – Dec 2016"
+    }
+  ],
+  "research": {
+    "conferencePapers": [
+      {
+        "title": "Secret Breach Detection in Source Code with Large Language Models",
+        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Rifat Shahriyar, S. M. Sohan",
+        "venue": "ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM 2025), Technical Track",
+        "paperLink": "https://conf.researchr.org/details/esem-2025/esem-2025-technical-track/8/Secret-Breach-Detection-in-Source-Code-with-Large-Language-Models",
+        "codeLink": "https://github.com/nafiurahman00/Source-Code-Secret-Detection-with-LLMs",
+        "description": "Background: Leaking sensitive information—such as API keys, tokens, and credentials—in source code remains a persistent security threat. Traditional regex and entropy-based tools often generate high false positives due to limited contextual understanding. Aims: This work aims to enhance secret detection in source code using large language models (LLMs), reducing false positives while maintaining high recall. We also evaluate the feasibility of using fine-tuned, smaller models for local deployment. Method: We propose a hybrid approach combining regex-based candidate extraction with LLM-based classification. We evaluate pre-trained and fine-tuned variants of various Large Language Models on a benchmark dataset from 818 GitHub repositories. Various prompting strategies and efficient fine-tuning methods are employed for both binary and multiclass classification. Results: The fine-tuned LLaMA-3.1 8B model achieved an F1-score of 0.9852 in binary classification, outperforming regex-only baselines. For multiclass classification, Mistral-7B reached 0.982 accuracy. Fine-tuning significantly improved performance across all models. Conclusions: Fine-tuned LLMs offer an effective and scalable solution for secret detection, greatly reducing false positives. Open-source models provide a practical alternative to commercial APIs, enabling secure and cost-efficient deployment in development workflows.",
+        "year": "2025",
+        "status": "Accepted"
+      },
+      {
+        "title": "Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation",
+        "authors": "Sadif Ahmed, Md Nafiu Rahman, Zahin Wahab, Rifat Shahriyar, Gias Uddin",
+        "venue": "IEEE/ACM International Conference on Mining Software Repositories (MSR 2026), Technical Track",
+        "paperLink": "https://arxiv.org/abs/2410.23657",
+        "codeLink": "https://github.com/nafiurahman00/Secret-Breach-Prevention-In-Software-Issue-Reports",
+        "description": "In the digital era, accidental exposure of sensitive information such as API keys, tokens, and credentials is a growing security threat. While most prior work focuses on detecting secrets in source code, leakage in software issue reports remains largely unexplored. This study fills that gap through a large-scale analysis and a practical detection pipeline for exposed secrets in GitHub issues. Our pipeline combines regular expression-based extraction with large language model (LLM) based contextual classification to detect real secrets and reduce false positives. We build a benchmark of 54,148 instances from public GitHub issues, including 5,881 manually verified true secrets. Using this dataset, we evaluate entropy-based baselines and keyword heuristics used by prior secret detection tools, classical machine learning, deep learning, and LLM-based methods. Regex and entropy based approaches achieve high recall but poor precision, while smaller models such as RoBERTa and CodeBERT greatly improve performance (F1 = 92.70%). Proprietary models like GPT-4o perform moderately in few-shot settings (F1 = 80.13%), and fine-tuned open-source larger LLMs such as Qwen and LLaMA reach up to 94.49% F1. Finally, we also validate our approach on 178 real-world GitHub repositories, achieving an F1-score of 81.6% which demonstrates our approach's strong ability to generalize to in-the-wild scenarios.",
+        "year": "2024",
+        "status": "Accepted"
+      },
+      {
+        "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
+        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Rifat Shahriyar, Gias Uddin",
+        "venue": "ACM International Conference on the Foundations of Software Engineering (FSE 2026), Tool Demo Track",
+        "paperLink": "https://arxiv.org/abs/2602.08072",
+        "codeLink": "https://github.com/disa-lab/IssueGuard",
+        "description": "GitHub and GitLab are widely used collaborative platforms whose issue-tracking systems contain large volumes of unstructured text, including logs, code snippets, and configuration examples. This creates a significant risk of accidental secret exposure, such as API keys and credentials, yet these platforms provide no mechanism to warn users before submission. We present IssueGuard, a tool for real-time detection and prevention of secret leaks in issue reports. Implemented as a Chrome extension, IssueGuard analyzes text as users type and combines regex-based candidate extraction with a fine-tuned CodeBERT model for contextual classification. This approach effectively separates real secrets from false positives and achieves an F1-score of 92.70% on a benchmark dataset, outperforming traditional regex-based scanners. IssueGuard integrates directly into the web interface and continuously analyzes the issue editor, presenting clear visual warnings to help users avoid submitting sensitive data. The source code is publicly available at https://github.com/disa-lab/IssueGuard , and a demonstration video is available at https://youtu.be/kvbWA8rr9cU.",
+        "year": "2025",
+        "status": "Accepted"
+      },
+      {
+        "title": "BanglaForge: LLM Collaboration with Self-Refinement for Bangla Code Generation",
+        "authors": "Mahir Labib Dihan, Sadif Ahmed, Md Nafiu Rahman",
+        "venue": "BLP Workshop at AACL-IJCNLP 2025",
+        "paperLink": "https://aclanthology.org/2025.banglalp-1.66/",
+        "codeLink": "https://github.com/mahirlabibdihan/BanglaForge",
+        "description": "We introduce BanglaForge, a new framework designed to generate executable code from Bangla language descriptions, addressing the challenges of a low-resource setting. Our approach employs a retrieval-augmented dual-model collaboration paradigm with iterative self-refinement guided by execution feedback. By integrating LLM-based translation and in-context learning, the system achieves a strong Pass@1 accuracy of 84.00% on the BLP-2025 Bangla Code Generation benchmark, demonstrating the effectiveness of our method for low-resource code generation.",
+        "year": "2025",
+        "status": "Accepted"
+      }
+    ],
+    "manuscriptsUnderReview": [
+      {
+        "title": "A Survey on Agentic Security: Applications, Threats and Defenses",
+        "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
+        "paperLink": "https://arxiv.org/abs/2510.06445",
+        "description": "In this work we present the first holistic survey of the agentic security landscape, structuring the field around three fundamental pillars: Applications, Threats, and Defenses. We provide a comprehensive taxonomy of over 160 papers, explaining how agents are used in downstream cybersecurity applications, inherent threats to agentic systems, and countermeasures designed to protect them. A detailed cross-cutting analysis shows emerging trends in agent architecture while revealing critical research gaps in model and modality coverage. A complete and continuously updated list of all surveyed papers is publicly available at https://github.com/kagnlp/Awesome-Agentic-Security",
+        "year": "2025",
+        "status": "Submitted at ACL 2026"
+      },
+      {
+        "title": "Explainable Transformer-CNN Hybrid for Modeling Brain Aging from MRI Images",
+        "authors": "Wasif Jalal, Md Nafiu Rahman, Md Sohel Rahman",
+        "paperLink": "https://arxiv.org/abs/2511.15188",
+        "codeLink": "https://github.com/wjalal/cse472_DL_project",
+        "description": "Accurate brain age estimation from structural MRI is a valuable biomarker for studying aging and neurodegeneration. Traditional regression and CNN-based methods face limitations such as manual feature engineering, limited receptive fields, and overfitting on heterogeneous data. Pure transformer models, while effective, require large datasets and high computational cost. We propose Brain ResNet over trained Vision Transformer (BrainRotViT), a hybrid architecture that combines the global context modeling of vision transformers (ViT) with the local refinement of residual CNNs. A ViT encoder is first trained on an auxiliary age and sex classification task to learn slice-level features. The frozen encoder is then applied to all sagittal slices to generate a 2D matrix of embedding vectors, which is fed into a residual CNN regressor that incorporates subject sex at the final fully-connected layer to estimate continuous brain age. Our method achieves an MAE of 3.34 years (Pearson r=0.98, Spearman \rho=0.97, R^2=0.95) on validation across 11 MRI datasets encompassing more than 130 acquisition sites, outperforming baseline and state-of-the-art models. It also generalizes well across 4 independent cohorts with MAEs between 3.77 and 5.04 years. Analyses on the brain age gap (the difference between the predicted age and actual age) show that aging patterns are associated with Alzheimer's disease, cognitive impairment, and autism spectrum disorder. Model attention maps highlight aging-associated regions of the brain, notably the cerebellar vermis, precentral and postcentral gyri, temporal lobes, and medial superior frontal gyrus. Our results demonstrate that this method provides an efficient, interpretable, and generalizable framework for brain-age prediction, bridging the gap between CNN- and transformer-based approaches while opening new avenues for aging and neurodegeneration research.",
+        "year": "2025",
+        "status": "Submitted at Neural Networks"
+      }
+    ],
+    "manuscriptsUnderPreparation": [],
+    "preprints": [
+      {
+        "title": "EVCC: Enhanced Vision Transformer-ConvNeXt-CoAtNet Fusion with Adaptive Routing for Classification",
+        "authors": "Kazi Reyazul Hasan, Md Nafiu Rahman, Sadif Ahmed, Wasif Jalal, Shahriar Raj, Mubasshira Musarrat, Muhammad Abdullah Adnan",
+        "paperLink": "https://arxiv.org/abs/2511.18691",
+        "codeLink": "https://github.com/kreyazulh/EVCC",
+        "description": "Hybrid vision architectures combining Transformers and CNNs have significantly advanced image classification, but they usually do so at significant computational cost. We introduce EVCC (Enhanced Vision Transformer-ConvNeXt-CoAtNet), a novel multi-branch architecture integrating the Vision Transformer, lightweight ConvNeXt, and CoAtNet through key innovations: (1) adaptive token pruning with information preservation, (2) gated bidirectional cross-attention for enhanced feature refinement, (3) auxiliary classification heads for multi-task learning, and (4) a dynamic router gate employing context-aware confidence-driven weighting. Experiments across the CIFAR-100, Tobacco3482, CelebA, and Brain Cancer datasets demonstrate EVCC's superiority over powerful models like DeiT-Base, MaxViT-Base, and CrossViT-Base by consistently achieving state-of-the-art accuracy with improvements of up to 2 percentage points, while reducing FLOPs by 25 to 35%. Our adaptive architecture adjusts computational demands to deployment needs by dynamically reducing token count, efficiently balancing the accuracy-efficiency trade-off while combining global context, local details, and hierarchical features for real-world applications. The source code of our implementation is available at https://anonymous.4open.science/r/EVCC",
+        "year": "2025",
+        "status": "Ongoing"
+      }
+    ]
+  },
+  "projects": [
+    {
+      "name": "Machine Learning Algorithms and Neural Network from Scratch",
+      "technologies": [
+        "Python",
+        "NumPy"
+      ],
+      "description": "Implementations of core ML algorithms (logistic regression with ensembles, PCA/SVD for reconstruction, EM clustering) and a feed-forward neural network with Adam optimizer built from numpy.",
+      "githubLink": "https://github.com/nafiurahman00/CSE-472"
+    },
+    {
+      "name": "Cryptography and Security Attacks",
+      "technologies": [
+        "Python",
+        "C++",
+        "Security"
+      ],
+      "description": "Implemented AES encryption and Diffie-Hellman key exchange, socket communication demos, and reviewed a mobile pentesting framework as part of course project.",
+      "githubLink": "https://github.com/nafiurahman00/CSE-406"
+    },
+    {
+      "name": "Network Simulation",
+      "technologies": [
+        "C++",
+        "NS3"
+      ],
+      "description": "Implemented Congestion Control Algorithm, threaded server-client sockets, error correction algorithms and simulated wired/wireless mobility scenarios.",
+      "githubLink": "https://github.com/nafiurahman00/CSE-322"
+    },
+    {
+      "name": "Operating System Internals with xv6",
+      "technologies": [
+        "C",
+        "xv6"
+      ],
+      "description": "Implemented threading and synchronization primitives, system calls, and explored scheduler internals in xv6.",
+      "githubLink": "https://github.com/nafiurahman00/CSE-314"
+    },
+    {
+      "name": "BusBuddy (Android)",
+      "technologies": [
+        "Flutter",
+        "Node.js",
+        "PostgreSQL",
+        "Firebase"
+      ],
+      "description": "Flutter app with Node.js backend, PostgreSQL and Firebase integration. Provided ticketing, schedules, tracking and real-time updates for university bus users.",
+      "githubLink": "https://github.com/nafiurahman00/BusBuddy-Client-End"
+    },
+    {
+      "name": "Nishorgo (E-commerce)",
+      "technologies": [
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "PHP",
+        "MySQL"
+      ],
+      "description": "Full stack e-commerce site for plant sales with filtering, cart, admin analytics and order management.",
+      "githubLink": "https://github.com/nafiurahman00/Term-Project-2-2-Nishorgo"
+    },
+    {
+      "name": "Compiler (subset of C)",
+      "technologies": [
+        "C",
+        "C++",
+        "Lex",
+        "Yacc",
+        "8086 Assembly"
+      ],
+      "description": "Subset-of-C compiler using Lex/Yacc and 8086-style assembly generation: lexer, parser, and intermediate code generation.",
+      "githubLink": "https://github.com/nafiurahman00/Compiler"
+    },
+    {
+      "name": "Catch the Egg (Game)",
+      "technologies": [
+        "OpenGL",
+        "C++",
+        "Igraphics"
+      ],
+      "description": "OpenGL / Igraphics game for catching falling eggs; implemented game mechanics, scoring and difficulty scaling.",
+      "githubLink": "https://github.com/nafiurahman00/Catch-The-Egg"
+    }
+  ],
+  "work": [
+    {
+      "title": "Lecturer",
+      "company": "BRAC University",
+      "companyLink": "https://bracu.ac.bd/",
+      "department": "Department of Computer Science and Engineering",
+      "location": "Dhaka",
+      "duration": "July 2025 – Present",
+      "startDate": "July 2025",
+      "endDate": "Present",
+      "type": "Full-time",
+      "description": "Teaching undergraduate courses including Numerical Methods and Software Engineering.",
+      "courses": [
+        {
+          "code": "CSE330",
+          "name": "Numerical Methods",
+          "type": "Theory, Lab",
+          "semesters": [
+            "Summer 2025",
+            "Fall 2025",
+            "Spring 2026"
+          ]
+        },
+        {
+          "code": "CSE470",
+          "name": "Software Engineering",
+          "type": "Theory",
+          "semesters": [
+            "Summer 2025",
+            "Fall 2025",
+            "Spring 2026"
+          ]
+        }
+      ],
+      "responsibilities": [
+        "Conducting Theory and Lab Classes (Course Load : 12.0 Credits) of each sections having 38-40 students.",
+        "Grading Scripts, Setting Up Questions and Invigilating for Exams.",
+        "Coordinating Lab Courses",
+        "Conducting Administrative Tasks assigned by the Department and the University."
+      ]
+    },
+    {
+      "title": "Research Assistant",
+      "company": "Bangladesh University of Engineering and Technology (BUET)",
+      "companyLink": "https://buet.ac.bd/",
+      "department": "Department of Computer Science and Engineering",
+      "location": "Dhaka",
+      "duration": "Mar 2025 – June 2025",
+      "startDate": "Mar 2025",
+      "endDate": "June 2025",
+      "type": "Research Position",
+      "description": "Worked on a pipeline to generate Playwright testing scripts automatically from high-level website descriptions and web UI traces. Explored benchmarks and WebUI gyms, prototyped selector generation methods, and evaluated the reliability of generated tests focusing on practical integration with developer workflows."
+    }
+  ],
+  "achievements": [
+    "Top 20 finalists — Robi Datathon 2024 (national deep learning competition)",
+    "5th at BLP 2025 Code Generation Challenge",
+    "Dean's list award and university merit scholarship at BUET"
+  ],
+  "skills": {
+    "technicalSkills": {
+      "Data Science & ML": [
+        "Python",
+        "NumPy",
+        "Pandas",
+        "scikit-learn",
+        "PyTorch",
+        "TensorFlow",
+        "Torchvision"
+      ],
+      "Databases": [
+        "PostgreSQL",
+        "PL/pgSQL",
+        "MongoDB",
+        "Firebase Firestore"
+      ],
+      "Full-Stack": [
+        "Node.js (backend)",
+        "HTML/CSS",
+        "Svelte",
+        "Flutter"
+      ],
+      "Languages": [
+        "C/C++",
+        "Python",
+        "Java",
+        "JavaScript / TypeScript",
+        "PHP",
+        "Bash",
+        "Dart"
+      ]
+    },
+    "spokenLanguages": [
+      "English (proficient)",
+      "Bengali (native)"
+    ]
+  },
+  "talks": [
+    {
+      "title": "Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation",
+      "venue": "MSR 2026",
+      "videoLink": "https://youtu.be/XDxYqU91Cas"
+    },
+    {
+      "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
+      "venue": "FSE 2026 Tool Demo Track",
+      "videoLink": "https://youtu.be/kvbWA8rr9cU"
+    },
+    {
+      "title": "Secret Breach Detection in Source Code with Large Language Models",
+      "venue": "ESEM 2025",
+      "videoLink": "https://drive.google.com/file/d/1PtkiMufGYinZtQ2qRGT-2nPxWKP_ZIMX/view?usp=drive_link",
+      "slidesLink": "https://drive.google.com/file/d/1N8LJl50T6ttlCd_Fol6J8EO92jj0PBhh/view?usp=drive_link"
+    }
+  ],
+  "coursework": [
+    "Software Engineering",
+    "Machine Learning",
+    "Artificial Intelligence",
+    "Linear Algebra and Fourier Analysis",
+    "Data Structures and Algorithms",
+    "Computer Graphics",
+    "Operating Systems",
+    "Compiler Design",
+    "Numerical Methods",
+    "Database Systems",
+    "Object Oriented Programming"
+  ]
+}

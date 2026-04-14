@@ -8,28 +8,18 @@ function toggleSection(elementId) {
 	}
 }
 
-// Load all data from JSON files
+// Load all data from a single JSON file
 document.addEventListener('DOMContentLoaded', function() {
-	Promise.all([
-		fetch('data/profile.json').then(res => res.json()),
-		fetch('data/research.json').then(res => res.json()),
-		fetch('data/projects.json').then(res => res.json()),
-		fetch('data/education.json').then(res => res.json()),
-		fetch('data/work.json').then(res => res.json()),
-		fetch('data/achievements.json').then(res => res.json()),
-		fetch('data/skills.json').then(res => res.json()),
-		fetch('data/talks.json').then(res => res.json()),
-		fetch('data/coursework.json').then(res => res.json())
-	]).then(([profile, research, projects, education, work, achievements, skills, talks, coursework]) => {
-		populateProfile(profile);
-		populateEducation(education);
-		populateResearch(research);
-		populateWorkExperience(work);
-		populateProjects(projects);
-		populateTalks(talks);
-		populateSkills(skills);
-		populateAchievements(achievements);
-		populateCoursework(coursework);
+	fetch('data/all.json').then(res => res.json()).then(function(data) {
+		populateProfile(data.profile);
+		populateEducation(data.education);
+		populateResearch(data.research);
+		populateWorkExperience(data.work);
+		populateProjects(data.projects);
+		populateTalks(data.talks);
+		populateSkills(data.skills);
+		populateAchievements(data.achievements);
+		populateCoursework(data.coursework);
 	}).catch(error => {
 		console.error('Error loading data:', error);
 	});

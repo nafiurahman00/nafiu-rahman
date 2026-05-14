@@ -202,7 +202,7 @@ span.highlight {
 }
 
 .theme-toggle {
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   z-index: 1000;
@@ -211,11 +211,18 @@ span.highlight {
   border: none;
   width: 40px;
   height: 40px;
+  border-radius: 50%;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease;
+}
+.theme-toggle:focus,
+.theme-toggle:active {
+  outline: none;
 }
 .theme-toggle:hover {
   transform: scale(1.1);

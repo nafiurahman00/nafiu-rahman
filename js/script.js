@@ -67,6 +67,11 @@ function populateProfile(profile) {
 		document.getElementById('profile-image').src = profile.image;
 	}
 
+	if (profile.imagecaption) {
+		document.getElementById('image-caption').textContent = profile.imagecaption;
+		document.getElementById('profile-image').alt = profile.imagecaption;
+	}
+
 	var bioHtml = '<p align="justify">';
 
 	// PhD notice (dark blue bold, a.html style)

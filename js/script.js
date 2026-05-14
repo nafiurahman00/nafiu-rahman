@@ -20,10 +20,44 @@ document.addEventListener('DOMContentLoaded', function() {
 		populateSkills(data.skills);
 		populateAchievements(data.achievements);
 		populateCoursework(data.coursework);
+		populateNews(data.news);
 	}).catch(error => {
 		console.error('Error loading data:', error);
 	});
+
 });
+
+// ==================== NEWS ====================
+function populateNews(news) {
+	// Sort news in reverse chronological order (latest first)
+	var months = {
+		"January": 0, "February": 1, "March": 2, "April": 3, "May": 4, "June": 5,
+		"July": 6, "August": 7, "September": 8, "October": 9, "November": 10, "December": 11
+	};
+	
+	news.sort(function(a, b) {
+		var partsA = a.date.split(' ');
+		var partsB = b.date.split(' ');
+		var dateA = new Date(parseInt(partsA[1]), months[partsA[0]]);
+		var dateB = new Date(parseInt(partsB[1]), months[partsB[0]]);
+		return dateB - dateA;
+	});
+
+	var html = '<p align="justify"><ul>';
+	news.forEach(function(item) {
+		html += '<li>';
+		html += '<b>[' + item.date + ']</b> ';
+		if (item.link) {
+			html += '<b><a href="' + item.link + '" target="_blank">' + item.title + '</a></b> — ';
+		} else {
+			html += '<b>' + item.title + '</b> — ';
+		}
+		html += item.description;
+		html += '</li><br>';
+	});
+	html += '</ul></p>';
+	document.getElementById('news-content').innerHTML = html;
+}
 
 // ==================== PROFILE ====================
 function populateProfile(profile) {
@@ -75,6 +109,7 @@ function populateProfile(profile) {
 	linksHtml += '<a href="' + profile.googlescholar + '" target="_blank">Google Scholar</a> <br>';
 	linksHtml += '<a href="' + profile.github + '" target="_blank">GitHub</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="' + profile.linkedin + '" target="_blank">LinkedIn</a> <br>';
+	linksHtml += '<a href="#News">Recent News</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="#Education">Education</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="#Research">Research</a> &nbsp/&nbsp ';
 	linksHtml += '<a href="#Work Experience">Work Experience</a> &nbsp/&nbsp ';

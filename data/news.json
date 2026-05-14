@@ -1,0 +1,27 @@
+[
+  
+  {
+    "date": "March 2026",
+    "title": "Paper Accepted at FSE 2026",
+    "description": "Our paper 'IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports' has been accepted at the ACM International Conference on the Foundations of Software Engineering (FSE 2026), Tool Demo Track.",
+    "link": "https://conf.researchr.org/details/fse-2026/fse-2026-demonstrations/8/IssueGuard-Real-Time-Secret-Leak-Prevention-Tool-for-GitHub-Issue-Reports"
+  },
+  {
+    "date": "January 2026",
+    "title": "Paper Accepted at MSR 2026",
+    "description": "Our paper 'Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation' has been accepted at the IEEE/ACM International Conference on Mining Software Repositories (MSR 2026), Technical Track.",
+    "link": "https://2026.msrconf.org/details/msr-2026-technical-papers/15/Secret-Leak-Detection-in-Software-Issue-Reports-using-LLMs-A-Comprehensive-Evaluatio"
+  },
+  {
+    "date": "June 2025",
+    "title": "Paper Accepted at ESEM 2025",
+    "description": "Our paper 'Secret Breach Detection in Source Code with Large Language Models' has been accepted at the ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM 2025).",
+    "link": "https://ieeexplore.ieee.org/abstract/document/11323433"
+  },
+  {
+    "date": "June 2025",
+    "title": "Joined BRAC University as a Lecturer",
+    "description": "Joined the Department of Computer Science and Engineering at BRAC University as a full-time Lecturer.",
+    "link": "https://bracu.ac.bd/"
+  }
+]

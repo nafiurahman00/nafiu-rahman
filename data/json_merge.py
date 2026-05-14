@@ -17,6 +17,7 @@ all_data = {
     "skills":       load("skills.json"),
     "talks":        load("talks.json"),
     "coursework":   load("coursework.json"),
+    "news":         load("news.json"),  
 }
 
 output_path = os.path.join(data_dir, "all.json")

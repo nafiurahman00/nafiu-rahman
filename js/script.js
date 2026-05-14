@@ -8,8 +8,27 @@ function toggleSection(elementId) {
 	}
 }
 
+// Theme toggling
+function toggleTheme() {
+	document.body.classList.toggle('dark-mode');
+	const isDark = document.body.classList.contains('dark-mode');
+	localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+
 // Load all data from a single JSON file
 document.addEventListener('DOMContentLoaded', function() {
+	const savedTheme = localStorage.getItem('theme');
+	const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+	const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+	
+	if (isDark) {
+		document.body.classList.add('dark-mode');
+	}
+
+	if (typeof lucide !== 'undefined') {
+		lucide.createIcons();
+	}
+
 	fetch('data/all.json').then(res => res.json()).then(function(data) {
 		populateProfile(data.profile);
 		populateEducation(data.education);
@@ -76,12 +95,12 @@ function populateProfile(profile) {
 
 	// PhD notice (dark blue bold, a.html style)
 	if (profile.phdNotice) {
-		bioHtml += '<span style="color: darkblue;"><b>' + profile.phdNotice + '</b></span><br><br>';
+		bioHtml += '<span class="phd-notice"><b>' + profile.phdNotice + '</b></span><br><br>';
 	}
 
 	// Research interests
 	if (profile.researchInterests && profile.researchInterests.length > 0) {
-		bioHtml += '<b style="color:#1772d0;">Major Research Interests:</b>';
+		bioHtml += '<b class="research-interest-title">Major Research Interests:</b>';
 		bioHtml += '<ul>';
 		profile.researchInterests.forEach(function(interest) {
 			bioHtml += '<li>' + interest + '</li>';
@@ -209,7 +228,7 @@ function buildPaperItem(paper, index) {
 	if (paper.paperLink) {
 		html += '<b><a href="' + paper.paperLink + '" target="_blank">' + paper.title + '</a></b>';
 	} else {
-		html += '<b style="color:#1772d0;">' + paper.title + '</b>';
+		html += '<b class="paper-title">' + paper.title + '</b>';
 	}
 	html += '<br>';
 

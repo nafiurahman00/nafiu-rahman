@@ -71,18 +71,50 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --link-color: #1772d0;
+  --link-hover-color: #f09228;
+  --highlight-bg: #ffffd0;
+  --abstract-bg: #f9f9f9;
+  --divider-bg: #ddd;
+  --theme-toggle-bg: #eee;
+  --theme-toggle-color: #333;
+  --phd-notice-color: darkblue;
+}
+
+body.dark-mode {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --link-color: #66b2ff;
+  --link-hover-color: #f0a345;
+  --highlight-bg: #444422;
+  --abstract-bg: #1e1e1e;
+  --divider-bg: #333;
+  --theme-toggle-bg: #333;
+  --theme-toggle-color: #eee;
+  --phd-notice-color: #66b2ff;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 a {
-  color: #1772d0;
+  color: var(--link-color);
   text-decoration: none;
 }
 
 a:focus,
 a:hover {
-  color: #f09228;
+  color: var(--link-hover-color);
   text-decoration: none;
 }
 
@@ -139,7 +171,7 @@ name {
 }
 
 span.highlight {
-  background-color: #ffffd0;
+  background-color: var(--highlight-bg);
 }
 
 /* Abstract / collapsible sections */
@@ -147,14 +179,54 @@ span.highlight {
   display: none;
   padding: 8px 12px;
   margin-top: 4px;
-  background: #f9f9f9;
-  border-left: 3px solid #1772d0;
+  background: var(--abstract-bg);
+  border-left: 3px solid var(--link-color);
   font-size: 13px;
 }
 
 .section-divider {
   border: 0;
   height: 1px;
-  background: #ddd;
+  background: var(--divider-bg);
   margin: 10px 0;
+}
+
+.phd-notice {
+  color: var(--phd-notice-color);
+}
+.research-interest-title {
+  color: var(--link-color);
+}
+.paper-title {
+  color: var(--link-color);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: transparent;
+  color: var(--text-color);
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-toggle .lucide-sun {
+  display: none;
+}
+body.dark-mode .theme-toggle .lucide-moon {
+  display: none;
+}
+body.dark-mode .theme-toggle .lucide-sun {
+  display: block;
 }

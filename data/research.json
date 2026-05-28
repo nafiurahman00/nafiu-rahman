@@ -1,6 +1,16 @@
 {
   "conferencePapers": [
     {
+      "title": "Empirical Study on Calibration of LLMs in Code Generation",
+      "authors": "Mohammed Latif Siddiq, Md Nafiu Rahman, Joanna C. S. Santos",
+      "venue": "IEEE International Conference on Software Maintenance and Evolution (ICSME 2025), Research Track",
+      "paperLink": "",
+      "codeLink": "",
+      "description": "",
+      "year": "2025",
+      "status": "Accepted"
+    },
+    {
       "title": "Secret Breach Detection in Source Code with Large Language Models",
       "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Rifat Shahriyar, S. M. Sohan",
       "venue": "ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM 2025), Technical Track",

@@ -248,11 +248,11 @@ function buildPaperItem(paper, index) {
 	if (paper.venue) {
 		html += '<div class="periodical">' + paper.venue;
 		if (paper.status) {
-			html += ' — <strong>' + paper.status + '</strong>';
+			// html += ' — <strong>' + paper.status + '</strong>';
 		}
 		html += '</div>';
 	} else if (paper.status) {
-		html += '<div class="periodical"><strong>' + paper.status + '</strong></div>';
+		// html += '<div class="periodical"><strong>' + paper.status + '</strong></div>';
 	}
 
 	html += '<div class="links">';

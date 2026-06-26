@@ -1,402 +1,418 @@
-// Toggle abstract/collapsible display
-function toggleSection(elementId) {
-	var el = document.getElementById(elementId);
-	if (el) {
-		// Use computed style as fallback when no inline style is set yet
-		var currentDisplay = el.style.display || window.getComputedStyle(el).display;
-		el.style.display = currentDisplay === 'none' ? 'block' : 'none';
-	}
+function decodeEmail(email) {
+	return email.replace(/ \[dot\] /g, '.').replace(/ \[at\] /g, '@');
 }
 
-// Theme toggling
-function toggleTheme() {
-	document.body.classList.toggle('dark-mode');
-	const isDark = document.body.classList.contains('dark-mode');
-	localStorage.setItem('theme', isDark ? 'dark' : 'light');
+function formatNameParts(name) {
+	var parts = name.trim().split(/\s+/);
+	if (parts.length <= 1) {
+		return { first: name, rest: '' };
+	}
+	return {
+		first: parts.slice(0, -1).join(' '),
+		rest: parts[parts.length - 1]
+	};
 }
 
-// Load all data from a single JSON file
-document.addEventListener('DOMContentLoaded', function() {
-	const savedTheme = localStorage.getItem('theme');
-	const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-	const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-	
-	if (isDark) {
-		document.body.classList.add('dark-mode');
-	}
+function formatNameHtml(name) {
+	return '<span class="font-weight-bold">' + name + '</span>';
+}
 
-	if (typeof lucide !== 'undefined') {
-		lucide.createIcons();
+function getVenueAbbr(paper) {
+	if (!paper.venue) {
+		return paper.status || 'Paper';
 	}
+	var match = paper.venue.match(/\(([A-Z]+(?:\s[A-Z]+)*\s\d{4})\)/);
+	if (match) {
+		return match[1];
+	}
+	var words = paper.venue.split(/\s+/).slice(0, 2);
+	return words.join(' ');
+}
 
-	fetch('data/all.json').then(res => res.json()).then(function(data) {
-		populateProfile(data.profile);
-		populateEducation(data.education);
-		populateResearch(data.research);
-		populateWorkExperience(data.work);
-		populateProjects(data.projects);
-		populateTalks(data.talks);
-		populateSkills(data.skills);
-		populateAchievements(data.achievements);
-		populateCoursework(data.coursework);
-		populateNews(data.news);
-	}).catch(error => {
-		console.error('Error loading data:', error);
+function initAbstractToggles() {
+	document.querySelectorAll('a.abstract').forEach(function(link) {
+		if (link.dataset.bound) return;
+		link.dataset.bound = 'true';
+		link.addEventListener('click', function(event) {
+			event.preventDefault();
+			var scope = link.closest('.links');
+			if (scope && scope.parentElement) {
+				scope = scope.parentElement;
+			} else {
+				scope = link.closest('li, .col-sm-8, .col-sm-12') || link.parentElement;
+			}
+			var panel = scope.querySelector('.abstract.hidden');
+			if (panel) {
+				scope.querySelectorAll('.abstract.hidden.open').forEach(function(openPanel) {
+					if (openPanel !== panel) openPanel.classList.remove('open');
+				});
+				panel.classList.toggle('open');
+			}
+		});
 	});
+}
 
+document.addEventListener('DOMContentLoaded', function() {
+	fetch('data/all.json')
+		.then(function(res) { return res.json(); })
+		.then(function(data) {
+			if (document.getElementById('profile-name')) populateProfile(data.profile);
+			if (document.getElementById('news-content')) populateNews(data.news);
+			if (document.getElementById('education-content')) populateEducation(data.education);
+			if (document.getElementById('research-content')) populateResearch(data.research);
+			if (document.getElementById('work-experience-content')) populateWorkExperience(data.work);
+			if (document.getElementById('projects-content')) populateProjects(data.projects);
+			if (document.getElementById('talks-content')) populateTalks(data.talks);
+			if (document.getElementById('skills-content')) populateSkills(data.skills);
+			if (document.getElementById('achievements-content')) populateAchievements(data.achievements);
+			if (document.getElementById('coursework-content')) populateCoursework(data.coursework);
+			initAbstractToggles();
+		})
+		.catch(function(error) {
+			console.error('Error loading data:', error);
+		});
 });
 
-// ==================== NEWS ====================
 function populateNews(news) {
-	// Sort news in reverse chronological order (latest first)
 	var months = {
 		"January": 0, "February": 1, "March": 2, "April": 3, "May": 4, "June": 5,
 		"July": 6, "August": 7, "September": 8, "October": 9, "November": 10, "December": 11
 	};
-	
+
 	news.sort(function(a, b) {
 		var partsA = a.date.split(' ');
 		var partsB = b.date.split(' ');
-		var dateA = new Date(parseInt(partsA[1]), months[partsA[0]]);
-		var dateB = new Date(parseInt(partsB[1]), months[partsB[0]]);
+		var dateA = new Date(parseInt(partsA[1], 10), months[partsA[0]]);
+		var dateB = new Date(parseInt(partsB[1], 10), months[partsB[0]]);
 		return dateB - dateA;
 	});
 
-	var html = '<p align="justify"><ul>';
+	news = news.slice(0, 10);
+
+	var html = '<div class="news-list">';
 	news.forEach(function(item) {
-		html += '<li>';
-		html += '<b>[' + item.date + ']</b> ';
+		html += '<div class="news-item" style="display: flex; margin-bottom: 1rem; align-items: flex-start;">';
+		html += '<div class="news-date" style="min-width: 120px; margin-right: 1rem;">';
+		html += '<span class="badge rounded" style="background-color: var(--global-theme-color, #4274D9); color: white; display: block; padding: 0.4em; text-align: center; font-size: 0.85rem;">' + item.date + '</span>';
+		html += '</div>';
+		html += '<div class="news-content" style="flex: 1;">';
 		if (item.link) {
-			html += '<b><a href="' + item.link + '" target="_blank">' + item.title + '</a></b> — ';
+			html += '<a class="news-title" href="' + item.link + '" target="_blank" rel="external nofollow noopener"><strong>' + item.title + '</strong></a> — ';
 		} else {
-			html += '<b>' + item.title + '</b> — ';
+			html += '<strong>' + item.title + '</strong> — ';
 		}
 		html += item.description;
-		html += '</li><br>';
+		html += '</div></div>';
 	});
-	html += '</ul></p>';
+	html += '</div>';
 	document.getElementById('news-content').innerHTML = html;
 }
 
-// ==================== PROFILE ====================
 function populateProfile(profile) {
-	document.getElementById('profile-name').textContent = profile.name;
+	document.getElementById('profile-name').innerHTML = formatNameHtml(profile.name);
+	document.getElementById('navbar-brand').innerHTML = formatNameHtml(profile.name);
+	document.getElementById('profile-subtitle').textContent = profile.title;
 
 	if (profile.image) {
 		document.getElementById('profile-image').src = profile.image;
 	}
 
 	if (profile.imagecaption) {
-		document.getElementById('image-caption').textContent = profile.imagecaption;
 		document.getElementById('profile-image').alt = profile.imagecaption;
+		document.getElementById('profile-more-info').innerHTML =
+			'<p style="font-size: 0.75rem; margin-bottom: 0.2rem; text-align: center;"><em>' + profile.imagecaption + '</em></p>';
+	} else {
+		document.getElementById('profile-more-info').innerHTML = '';
 	}
 
-	var bioHtml = '<p align="justify">';
+	if (profile.location) {
+		document.getElementById('profile-more-info').innerHTML +=
+			'<p style="font-size: 0.9rem; text-align: center;"><i class="fas fa-map-marker-alt" style="color: var(--global-theme-color);"></i> ' + profile.location + '</p>';
+	}
 
-	// PhD notice (dark blue bold, a.html style)
+	var bioHtml = '';
+
 	if (profile.phdNotice) {
-		bioHtml += '<span class="phd-notice"><b>' + profile.phdNotice + '</b></span><br><br>';
+		bioHtml += '<blockquote class="block-tip phd-notice"><p><strong>' + profile.phdNotice + '</strong></p></blockquote>';
 	}
 
-	// Research interests
 	if (profile.researchInterests && profile.researchInterests.length > 0) {
-		bioHtml += '<b class="research-interest-title">Major Research Interests:</b>';
+		bioHtml += '<div class="research-interests">';
+		bioHtml += '<strong>Major Research Interests</strong>';
 		bioHtml += '<ul>';
 		profile.researchInterests.forEach(function(interest) {
 			bioHtml += '<li>' + interest + '</li>';
 		});
-		bioHtml += '</ul>';
+		bioHtml += '</ul></div>';
 	}
 
-	// Main bio
-	bioHtml += profile.bio + '<br>';
+	bioHtml += '<p>' + profile.bio + '</p>';
 
-	// Lecturer faculty site links
 	if (profile.facultySites && profile.facultySites.length > 0) {
-		bioHtml += 'Working as a <b>Lecturer here at Brac University CSE Department.</b> <b>';
+		bioHtml += '<p>Working as a <strong>Lecturer at Brac University CSE Department.</strong> ';
 		profile.facultySites.forEach(function(site, i) {
-			bioHtml += '<a href="' + site.url + '" target="_blank">(' + site.label + ')</a>';
+			bioHtml += '<a href="' + site.url + '" target="_blank" rel="external nofollow noopener">(' + site.label + ')</a>';
 			if (i < profile.facultySites.length - 1) bioHtml += ' ';
 		});
-		bioHtml += '</b>';
+		bioHtml += '</p>';
 	}
 
-	bioHtml += '</p>';
 	document.getElementById('profile-bio-content').innerHTML = bioHtml;
 
-	// Build nav-style links
-	var linksHtml = '';
-	linksHtml += '<a href="mailto:' + profile.email.replace(/ \[dot\] /g, '.').replace(/ \[at\] /g, '@') + '">Email</a> &nbsp/&nbsp ';
+	var email = decodeEmail(profile.email);
+	var socialHtml = '<div class="contact-icons">';
 	if (profile.cv) {
-		linksHtml += '<a href="' + profile.cv + '" target="_blank">Resume</a> &nbsp/&nbsp ';
+		socialHtml += '<a href="' + profile.cv + '" target="_blank" title="CV"><i class="ai ai-cv"></i></a>';
 	}
-	linksHtml += '<a href="' + profile.googlescholar + '" target="_blank">Google Scholar</a> <br>';
-	linksHtml += '<a href="' + profile.github + '" target="_blank">GitHub</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="' + profile.linkedin + '" target="_blank">LinkedIn</a> <br>';
-	linksHtml += '<a href="#News">Recent News</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Education">Education</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Research">Research</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Work Experience">Work Experience</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Technical Skill">Technical Skill</a> <br>';
-	linksHtml += '<a href="#Honors &amp; Awards">Honors &amp; Awards</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Projects">Notable Projects</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Talks">Talks</a> &nbsp/&nbsp ';
-	linksHtml += '<a href="#Relevant Academic Coursework">Coursework</a>';
-	document.getElementById('profile-links').innerHTML = linksHtml;
+	socialHtml += '<a href="mailto:' + email + '" title="Email"><i class="fa-solid fa-envelope"></i></a>';
+	socialHtml += '<a href="' + profile.github + '" target="_blank" rel="external nofollow noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>';
+	socialHtml += '<a href="' + profile.linkedin + '" target="_blank" rel="external nofollow noopener" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>';
+	socialHtml += '<a href="' + profile.googlescholar + '" target="_blank" rel="external nofollow noopener" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>';
+	socialHtml += '</div>';
+	socialHtml += '<div class="contact-note">' + email + '</div>';
+	document.getElementById('profile-social').innerHTML = socialHtml;
 }
 
-// ==================== EDUCATION ====================
 function populateEducation(education) {
-	var html = '';
+	var html = '<div class="education-list">';
 	education.forEach(function(edu) {
-		html += '<p align="justify">';
-		html += '<b>' + edu.degree + '</b>';
-		html += ' [' + edu.year + '] <br>';
-		html += '<a href="#">' + edu.institution + ', ' + edu.location + '</a> <br>';
-		html += edu.details;
-		if (edu.coursework) {
-			html += '<br><i>Coursework: ' + edu.coursework + '</i>';
+		html += '<div class="education-entry" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--global-divider-color, #eee);">';
+		html += '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.2rem;">';
+		html += '<h5 style="margin: 0; font-weight: bold; color: var(--global-theme-color, #4274D9);">' + edu.degree + '</h5>';
+		html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.3em 0.6em;">' + edu.year + '</span>';
+		html += '</div>';
+		html += '<div class="institution" style="font-style: italic; margin-bottom: 0.5rem;">' + edu.institution + ', ' + edu.location + '</div>';
+		if (edu.details) {
+			html += '<div class="details"><span class="badge rounded" style="background-color: var(--global-theme-color, #4274D9); color: white; padding: 0.4em 0.8em; font-size: 0.9rem;">' + edu.details + '</span></div>';
 		}
-		html += '</p>';
+		if (edu.coursework) {
+			html += '<div class="coursework mt-2" style="font-size: 0.9rem; color: #6c757d;"><em>Coursework: ' + edu.coursework + '</em></div>';
+		}
+		html += '</div>';
 	});
+	html += '</div>';
 	document.getElementById('education-content').innerHTML = html;
 }
 
-// ==================== RESEARCH ====================
 function populateResearch(research) {
 	var html = '';
 	var counter = 0;
+	var sections = [
+		{ key: 'conferencePapers', label: 'Conference Publications' },
+		{ key: 'journalPapers', label: 'Journal Publications' },
+		{ key: 'manuscriptsUnderReview', label: 'Manuscripts Under Review' },
+		{ key: 'manuscriptsUnderPreparation', label: 'Manuscripts Under Preparation' },
+		{ key: 'preprints', label: 'Preprints' }
+	];
 
-	// Conference Papers
-	if (research.conferencePapers && research.conferencePapers.length > 0) {
-		html += '<p align="justify"><b>Conference Publication</b> <br>';
-		html += '<ul>';
-		research.conferencePapers.forEach(function(paper) {
+	sections.forEach(function(section) {
+		var papers = research[section.key];
+		if (!papers || papers.length === 0) return;
+
+		html += '<h3 class="bibliography">' + section.label + '</h3>';
+		html += '<ol class="bibliography">';
+		papers.forEach(function(paper) {
 			html += buildPaperItem(paper, counter++);
 		});
-		html += '</ul></p>';
-	}
-
-	// Journal Papers
-	if (research.journalPapers && research.journalPapers.length > 0) {
-		html += '<p align="justify"><b>Journal Publication</b> <br>';
-		html += '<ul>';
-		research.journalPapers.forEach(function(paper) {
-			html += buildPaperItem(paper, counter++);
-		});
-		html += '</ul></p>';
-	}
-
-	// Manuscripts Under Review
-	if (research.manuscriptsUnderReview && research.manuscriptsUnderReview.length > 0) {
-		html += '<p align="justify"><b>Manuscript Under Review</b> <br>';
-		html += '<ul>';
-		research.manuscriptsUnderReview.forEach(function(paper) {
-			html += buildPaperItem(paper, counter++);
-		});
-		html += '</ul></p>';
-	}
-
-	// Manuscripts Under Preparation
-	if (research.manuscriptsUnderPreparation && research.manuscriptsUnderPreparation.length > 0) {
-		html += '<p align="justify"><b>Manuscript Under Preparation</b> <br>';
-		html += '<ul>';
-		research.manuscriptsUnderPreparation.forEach(function(paper) {
-			html += buildPaperItem(paper, counter++);
-		});
-		html += '</ul></p>';
-	}
-
-	// Preprints
-	if (research.preprints && research.preprints.length > 0) {
-		html += '<p align="justify"><b>Preprints</b> <br>';
-		html += '<ul>';
-		research.preprints.forEach(function(paper) {
-			html += buildPaperItem(paper, counter++);
-		});
-		html += '</ul></p>';
-	}
+		html += '</ol>';
+	});
 
 	document.getElementById('research-content').innerHTML = html;
+
+	document.getElementById('research-wordcloud').innerHTML =
+		'<div class="wordcloud-wrap">' +
+		'<p>To portray the core themes of my research, here is a wordcloud generated from the introductions of my peer-reviewed papers and arXiv preprints.</p>' +
+		'<img src="img/research_wordcloud.png" alt="Research Wordcloud" class="z-depth-1 rounded">' +
+		'</div>';
 }
 
 function buildPaperItem(paper, index) {
-	var absId = 'paper_abs_' + index;
-	var html = '<li>';
+	var paperId = 'paper_' + index;
+	var abbr = getVenueAbbr(paper);
+	var html = '<li><div class="row">';
 
-	// Title
-	if (paper.paperLink) {
-		html += '<b><a href="' + paper.paperLink + '" target="_blank">' + paper.title + '</a></b>';
-	} else {
-		html += '<b class="paper-title">' + paper.title + '</b>';
-	}
-	html += '<br>';
-
-	// Details sub-list
-	html += '<ul>';
-	html += '<li>' + paper.authors + '</li>';
-
-	if (paper.venue) {
-		html += '<li>' + paper.venue;
-		if (paper.status) {
-			html += ' — <b>' + paper.status + '</b>';
-		}
-		html += '</li>';
-	} else if (paper.status) {
-		html += '<li><b>' + paper.status + '</b></li>';
-	}
-
-	// Links row
-	html += '<li>';
-	html += '[<a href="#" onclick="toggleSection(\'' + absId + '\'); return false;">abstract</a>]';
-	if (paper.codeLink) {
-		html += ' [<a href="' + paper.codeLink + '" target="_blank">code</a>]';
-	}
-	if (paper.paperLink) {
-		html += ' [<a href="' + paper.paperLink + '" target="_blank">paper</a>]';
-	}
-	html += '</li>';
-
-	html += '</ul>';
-
-	// Abstract
-	html += '<div id="' + absId + '" class="abstract-content">';
-	html += '<p>' + paper.description + '</p>';
+	html += '<div class="col col-sm-2 abbr">';
+	html += '<abbr class="badge rounded w-100"><div>' + abbr + '</div></abbr>';
 	html += '</div>';
 
-	html += '</li><br>';
+	html += '<div id="' + paperId + '" class="col-sm-8">';
+
+	if (paper.paperLink) {
+		html += '<div class="title"><a href="' + paper.paperLink + '" target="_blank" rel="external nofollow noopener">' + paper.title + '</a></div>';
+	} else {
+		html += '<div class="title">' + paper.title + '</div>';
+	}
+
+	html += '<div class="author">' + paper.authors + '</div>';
+
+	if (paper.venue) {
+		html += '<div class="periodical">' + paper.venue;
+		if (paper.status) {
+			html += ' — <strong>' + paper.status + '</strong>';
+		}
+		html += '</div>';
+	} else if (paper.status) {
+		html += '<div class="periodical"><strong>' + paper.status + '</strong></div>';
+	}
+
+	html += '<div class="links">';
+	if (paper.description) {
+		html += '<a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>';
+	}
+	if (paper.codeLink) {
+		html += ' <a href="' + paper.codeLink + '" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">Code</a>';
+	}
+	if (paper.paperLink) {
+		html += ' <a href="' + paper.paperLink + '" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">Paper</a>';
+	}
+	html += '</div>';
+
+	if (paper.description) {
+		html += '<div class="abstract hidden"><p>' + paper.description + '</p></div>';
+	}
+
+	html += '</div></div></li>';
 	return html;
 }
 
-// ==================== WORK EXPERIENCE ====================
 function populateWorkExperience(work) {
-	var html = '';
-	work.forEach(function(job, idx) {
-		html += '<p align="justify">';
-		html += '<b>' + job.title + ', ' + job.department + '</b> [' + job.duration + '] <br>';
+	var html = '<div class="work-list">';
+	work.forEach(function(job) {
+		html += '<div class="work-entry" style="margin-bottom: 2.5rem;">';
+		
+		html += '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.2rem;">';
+		html += '<h4 style="margin: 0; font-weight: bold;">' + job.title + '</h4>';
+		html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em;">' + job.duration + '</span>';
+		html += '</div>';
+
+		html += '<div class="company" style="margin-bottom: 1rem; font-size: 1.1rem; color: var(--global-theme-color, #4274D9);">';
 		if (job.companyLink) {
-			html += '<b><a href="' + job.companyLink + '">' + job.company + '</a></b> <br><br>';
+			html += '<a href="' + job.companyLink + '" target="_blank" rel="external nofollow noopener" style="font-weight: bold; color: inherit;">' + job.company + '</a>';
 		} else {
-			html += '<b>' + job.company + '</b> <br><br>';
+			html += '<span style="font-weight: bold;">' + job.company + '</span>';
 		}
+		html += ', ' + job.department;
+		html += '</div>';
 
-		// Courses with semester detail
 		if (job.courses && job.courses.length > 0) {
-			html += '<b>Courses Currently Teaching and Previously Taught</b> :';
-			html += '<ul>';
+			html += '<div style="margin-top: 1rem; font-weight: bold;">Courses Currently Teaching and Previously Taught</div>';
+			html += '<div class="courses-list" style="margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">';
 			job.courses.forEach(function(course) {
-				html += '<li>' + course.code + ' : <b>' + course.name + '</b> [' + course.type + '] <br>';
-				html += 'Semesters : ' + course.semesters.join(', ');
-				html += '</li>';
+				html += '<div class="course-item" style="padding: 0.75rem; background-color: rgba(66, 116, 217, 0.05); border-left: 4px solid var(--global-theme-color, #4274D9); border-radius: 4px;">';
+				html += '<div style="margin-bottom: 0.25rem;"><strong>' + course.code + ': ' + course.name + '</strong> <span class="badge rounded" style="background-color: #6c757d; color: white; margin-left: 0.5rem; font-weight: normal;">' + course.type + '</span></div>';
+				var semHtml = course.semesters.map(function(s) {
+					return '<span class="badge rounded" style="background-color: #e9ecef; color: #495057; border: 1px solid #ced4da; margin-right: 0.3rem; margin-top: 0.3rem; font-weight: normal;">' + s + '</span>';
+				}).join('');
+				html += '<div><span style="font-size: 0.85rem; font-weight: bold; margin-right: 0.5rem; color: #495057;">Semesters:</span>' + semHtml + '</div>';
+				html += '</div>';
 			});
-			html += '</ul>';
+			html += '</div>';
 		}
 
-		// Responsibilities
 		if (job.responsibilities && job.responsibilities.length > 0) {
-			html += '<b>Responsibilities</b> :';
-			html += '<ul>';
+			html += '<div style="margin-top: 1rem; font-weight: bold;">Responsibilities</div><ul style="margin-top: 0.5rem; padding-left: 1.5rem;">';
 			job.responsibilities.forEach(function(resp) {
-				html += '<li>' + resp + '</li>';
+				html += '<li style="margin-bottom: 0.25rem;">' + resp + '</li>';
 			});
 			html += '</ul>';
 		}
 
-		// Fallback description (for non-lecturer roles)
 		if (!job.courses && job.description) {
-			html += job.description;
+			html += '<p style="margin-top: 1rem;">' + job.description + '</p>';
 		}
 
-		html += '</p>';
-
-		// Divider between jobs
-		if (idx < work.length - 1) {
-			html += '<hr class="section-divider">';
-		}
+		html += '</div>';
 	});
+	html += '</div>';
 	document.getElementById('work-experience-content').innerHTML = html;
 }
 
-// ==================== PROJECTS ====================
 function populateProjects(projects) {
-	var html = '<p align="justify"><ul>';
+	var html = '<ul class="project-list" style="list-style-type: disc; padding-left: 1.5rem; list-style-position: outside;">';
 	projects.forEach(function(project, index) {
-		var summaryId = 'project_summary_' + index;
-		html += '<li>';
-		html += '<b>' + project.name + '</b>';
+		var projectId = 'project_' + index;
+		html += '<li><div class="project-item">';
+		html += '<div class="title">' + project.name;
 		if (project.technologies && project.technologies.length > 0) {
-			html += ' (' + project.technologies.join(', ') + ')';
+			html += ' <span class="periodical">(' + project.technologies.join(', ') + ')</span>';
 		}
-		html += '<br>';
-		html += '[<a href="#" onclick="toggleSection(\'' + summaryId + '\'); return false;">Summary</a>]';
-		if (project.githubLink) {
-			html += ' [<a href="' + project.githubLink + '" target="_blank">GitHub Repository</a>]';
-		}
-		html += '<div id="' + summaryId + '" class="abstract-content">';
-		html += '<p>' + project.description + '</p>';
 		html += '</div>';
-		html += '</li><br>';
+		html += '<div class="links">';
+		html += '<a class="abstract btn btn-sm z-depth-0" role="button">Summary</a>';
+		if (project.githubLink) {
+			html += ' <a href="' + project.githubLink + '" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">GitHub</a>';
+		}
+		html += '</div>';
+		html += '<div class="abstract hidden"><p>' + project.description + '</p></div>';
+		html += '</div></li>';
 	});
-	html += '</ul></p>';
+	html += '</ul>';
 	document.getElementById('projects-content').innerHTML = html;
 }
 
-// ==================== TALKS & PRESENTATIONS ====================
 function populateTalks(talks) {
-	var html = '<p align="justify"><ul>';
+	var html = '<ul class="talk-list">';
 	talks.forEach(function(talk) {
-		html += '<li>';
-		html += '<b>' + talk.title + '</b>';
+		html += '<li><strong>' + talk.title + '</strong>';
 		if (talk.venue) {
 			html += ' — ' + talk.venue;
 		}
-		html += '<br>';
+		html += '<div class="links" style="margin-top: 0.25rem;">';
 		if (talk.videoLink) {
-			html += '[<a href="' + talk.videoLink + '" target="_blank">Video</a>] ';
+			html += '<a href="' + talk.videoLink + '" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">Video</a> ';
 		}
 		if (talk.slidesLink) {
-			html += '[<a href="' + talk.slidesLink + '" target="_blank">Slides</a>] ';
+			html += '<a href="' + talk.slidesLink + '" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">Slides</a> ';
 		}
 		if (talk.paperLink) {
-			html += '[<a href="' + talk.paperLink + '" target="_blank">Paper</a>] ';
+			html += '<a href="' + talk.paperLink + '" class="btn btn-sm z-depth-0" role="button" target="_blank" rel="external nofollow noopener">Paper</a> ';
 		}
-		html += '</li><br>';
+		html += '</div></li>';
 	});
-	html += '</ul></p>';
+	html += '</ul>';
 	document.getElementById('talks-content').innerHTML = html;
 }
 
-// ==================== SKILLS ====================
 function populateSkills(skills) {
-	var html = '<p align="justify"><ul>';
+	var html = '<div class="skills-container" style="display: flex; flex-direction: column; gap: 1.8rem;">';
 
 	if (skills.technicalSkills) {
 		for (var category in skills.technicalSkills) {
 			if (skills.technicalSkills.hasOwnProperty(category)) {
-				html += '<li> <b>' + category + '</b> : ' + skills.technicalSkills[category].join(', ') + ' </li>';
+				html += '<div class="skill-category">';
+				html += '<h5 style="margin-bottom: 0.8rem; font-weight: bold; color: var(--global-theme-color, #4274D9); border-bottom: 2px solid var(--global-theme-color, #4274D9); padding-bottom: 0.3rem; display: inline-block;">' + category + '</h5>';
+				html += '<div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">';
+				skills.technicalSkills[category].forEach(function(skill) {
+					html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em; font-size: 0.95rem; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' + skill + '</span>';
+				});
+				html += '</div></div>';
 			}
 		}
 	}
 
 	if (skills.spokenLanguages) {
-		html += '<li> <b>Spoken Languages</b> : ' + skills.spokenLanguages.join(', ') + ' </li>';
+		html += '<div class="skill-category">';
+		html += '<h5 style="margin-bottom: 0.8rem; font-weight: bold; color: var(--global-theme-color, #4274D9); border-bottom: 2px solid var(--global-theme-color, #4274D9); padding-bottom: 0.3rem; display: inline-block;">Spoken Languages</h5>';
+		html += '<div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">';
+		skills.spokenLanguages.forEach(function(lang) {
+			html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em; font-size: 0.95rem; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' + lang + '</span>';
+		});
+		html += '</div></div>';
 	}
 
-	html += '</ul></p>';
+	html += '</div>';
 	document.getElementById('skills-content').innerHTML = html;
 }
 
-// ==================== ACHIEVEMENTS ====================
 function populateAchievements(achievements) {
-	var html = '<p align="justify"><ul>';
+	var html = '<ul class="award-list">';
 	achievements.forEach(function(item) {
 		html += '<li>' + item + '</li>';
 	});
-	html += '</ul></p>';
+	html += '</ul>';
 	document.getElementById('achievements-content').innerHTML = html;
 }
 
-// ==================== COURSEWORK ====================
 function populateCoursework(coursework) {
 	document.getElementById('coursework-content').textContent = coursework.join(', ') + '.';
 }

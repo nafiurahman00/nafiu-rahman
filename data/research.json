@@ -1,13 +1,13 @@
 {
   "conferencePapers": [
     {
-      "title": "Empirical Study on Calibration of LLMs in Code Generation",
+      "title": "An Empirical Study of Security Calibration in Large Language Models for Code",
       "authors": "Mohammed Latif Siddiq, Md Nafiu Rahman, Joanna C. S. Santos",
-      "venue": "IEEE International Conference on Software Maintenance and Evolution (ICSME 2025), Research Track",
-      "paperLink": "",
-      "codeLink": "",
-      "description": "",
-      "year": "2025",
+      "venue": "IEEE International Conference on Software Maintenance and Evolution (ICSME 2026), Research Track",
+      "paperLink": "https://conf.researchr.org/details/icsme-2026/icsme-2026-papers/29/An-Empirical-Study-of-Security-Calibration-in-Large-Language-Models-for-Code",
+      "codeLink": "https://github.com/s2e-lab/Calibrating-Secure-Code-Generation",
+      "description": "Large Language Models (LLMs) are rapidly transforming software development, yet their use in security-critical contexts raises a key question: do models know when their generated code is insecure? This property, known as calibration, measures whether a model’s confidence aligns with the true correctness of its outputs. We present the first large-scale empirical study of security calibration in LLM-generated code. Our evaluation analyzes thousands of generations across two complementary benchmarks: self-contained security tasks and multi-language repository-level contexts. We evaluate GPT-4o-mini, Gemini-2.0-Flash, and Qwen3-Coder-Next across multiple temperature settings. Our results show that all models are systematically overconfident. Functional calibration is consistently worse than security calibration, suggesting that execution brittleness amplifies uncertainty more than vulnerability pattern recognition. Calibration-guided repair yields limited improvements and often introduces functional regressions, revealing a rigidity barrier that prevents security-critical transformations. Finally, while architectural gating can reduce miscalibration in controlled settings, calibration degrades substantially in realistic repository-level contexts, increasing the risk of False Trust in vulnerable code.",
+      "year": "2026",
       "status": "Accepted"
     },
     {

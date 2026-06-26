@@ -1,11 +1,23 @@
 [
   {
+    "title": "Summer Research Intern",
+    "company": "University of Illinois Urbana-Champaign (UIUC)",
+    "companyLink": "https://www.shinhwei.com/",
+    "department": "UIUC++ Summer Research in Software Engineering (SRSE) 2026",
+    "location": "Urbana-Champaign, IL",
+    "duration": "May 2026 \u2013 Present",
+    "startDate": "May 2026",
+    "endDate": "Present",
+    "type": "Research Internship",
+    "description": "Working as a Summer Research Intern under the supervision of <a href=\"https://www.shinhwei.com/\" target=\"_blank\" rel=\"external nofollow noopener\">Dr. Shin Hwei Tan</a> as part of the UIUC++ SRSE program."
+  },
+  {
     "title": "Lecturer",
     "company": "BRAC University",
     "companyLink": "https://bracu.ac.bd/",
     "department": "Department of Computer Science and Engineering",
     "location": "Dhaka",
-    "duration": "July 2025 – Present",
+    "duration": "July 2025 \u2013 Present",
     "startDate": "July 2025",
     "endDate": "Present",
     "type": "Full-time",
@@ -45,7 +57,7 @@
     "companyLink": "https://buet.ac.bd/",
     "department": "Department of Computer Science and Engineering",
     "location": "Dhaka",
-    "duration": "Mar 2025 – June 2025",
+    "duration": "Mar 2025 \u2013 June 2025",
     "startDate": "Mar 2025",
     "endDate": "June 2025",
     "type": "Research Position",

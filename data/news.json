@@ -1,5 +1,16 @@
 [
-  
+  {
+    "date": "May 2026",
+    "title": "Summer Research Intern at UIUC",
+    "description": "Joined as a Summer Research Intern at the University of Illinois Urbana-Champaign (UIUC) under the UIUC++ Summer Research in Software Engineering (SRSE) 2026 program, supervised by <a href=\"https://www.shinhwei.com/\" target=\"_blank\" rel=\"external nofollow noopener\">Dr. Shin Hwei Tan</a>.",
+    "link": "https://www.shinhwei.com/"
+  },
+  {
+    "date": "May 2026",
+    "title": "Paper Accepted at ICSME 2026",
+    "description": "Our paper 'An Empirical Study of Security Calibration in Large Language Models for Code' has been accepted at the IEEE International Conference on Software Maintenance and Evolution (ICSME 2026), Research Track.",
+    "link": "https://conf.researchr.org/details/icsme-2026/icsme-2026-papers/29/An-Empirical-Study-of-Security-Calibration-in-Large-Language-Models-for-Code"
+  },
   {
     "date": "March 2026",
     "title": "Paper Accepted at FSE 2026",

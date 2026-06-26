@@ -1,239 +1,135 @@
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v15/S6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_FQftx9897sxZ.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v15/S6u_w4BMUTPHjxsI5wq_Gwftx9897g.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v15/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v15/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 
 :root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --link-color: #1772d0;
-  --link-hover-color: #f09228;
-  --highlight-bg: #ffffd0;
-  --abstract-bg: #f9f9f9;
-  --divider-bg: #ddd;
-  --theme-toggle-bg: #eee;
-  --theme-toggle-color: #333;
-  --phd-notice-color: darkblue;
+  --global-footer-bg-color: var(--global-bg-color);
+  --global-footer-text-color: var(--global-text-color);
+  --global-footer-link-color: var(--global-theme-color);
 }
 
-body.dark-mode {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
-  --link-color: #66b2ff;
-  --link-hover-color: #f0a345;
-  --highlight-bg: #444422;
-  --abstract-bg: #1e1e1e;
-  --divider-bg: #333;
-  --theme-toggle-bg: #333;
-  --theme-toggle-color: #eee;
-  --phd-notice-color: #66b2ff;
+html[data-theme="dark"] {
+  --global-footer-bg-color: var(--global-bg-color);
+  --global-footer-text-color: var(--global-text-color);
+  --global-footer-link-color: var(--global-theme-color);
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:focus,
-a:hover {
-  color: var(--link-hover-color);
-  text-decoration: none;
-}
-
-body,
-td,
-th,
-tr,
-p,
-a {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-strong {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-}
-
-heading {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 22px;
-}
-
-papertitle {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-name {
-  font-family: 'Lato', Verdana, Helvetica, sans-serif;
-  font-size: 32px;
-}
-
-.one {
-  width: 160px;
-  height: 160px;
-  position: relative;
-}
-
-.two {
-  width: 160px;
-  height: 160px;
-  position: absolute;
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-}
-
-.fade {
-  transition: opacity .2s ease-in-out;
-  -moz-transition: opacity .2s ease-in-out;
-  -webkit-transition: opacity .2s ease-in-out;
-}
-
-span.highlight {
-  background-color: var(--highlight-bg);
-}
-
-/* Abstract / collapsible sections */
-.abstract-content {
-  display: none;
-  padding: 8px 12px;
-  margin-top: 4px;
-  background: var(--abstract-bg);
-  border-left: 3px solid var(--link-color);
-  font-size: 13px;
-}
-
-.section-divider {
-  border: 0;
-  height: 1px;
-  background: var(--divider-bg);
-  margin: 10px 0;
-}
+/* Site-specific overrides on top of al-folio */
 
 .phd-notice {
-  color: var(--phd-notice-color);
-}
-.research-interest-title {
-  color: var(--link-color);
-}
-.paper-title {
-  color: var(--link-color);
+	margin-bottom: 1rem;
+	overflow: hidden;
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-  background: transparent;
-  color: var(--text-color);
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease;
-}
-.theme-toggle:focus,
-.theme-toggle:active {
-  outline: none;
-}
-.theme-toggle:hover {
-  transform: scale(1.1);
+.research-interests {
+	margin-top: 1rem;
 }
 
-.theme-toggle .lucide-sun {
-  display: none;
+.research-interests ul {
+	padding-left: 1.25rem;
 }
-body.dark-mode .theme-toggle .lucide-moon {
-  display: none;
+
+.wordcloud-wrap {
+	margin-top: 1.5rem;
+	text-align: center;
 }
-body.dark-mode .theme-toggle .lucide-sun {
-  display: block;
+
+.wordcloud-wrap img {
+	width: 60%;
+	max-width: 100%;
+	border-radius: 8px;
+}
+
+.wordcloud-wrap p {
+	text-align: justify;
+}
+
+.education-entry + .education-entry {
+	margin-top: 1.25rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--global-divider-color);
+}
+
+.work-entry + .work-entry {
+	margin-top: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--global-divider-color);
+}
+
+.project-list,
+.talk-list,
+.skill-list,
+.award-list {
+	padding-left: 1.25rem;
+}
+
+.project-list li,
+.talk-list li,
+.skill-list li,
+.award-list li {
+	margin-bottom: 0.75rem;
+}
+
+.contact-note {
+	margin-top: 0.5rem;
+	font-size: 0.9rem;
+	color: var(--global-text-color-light);
+}
+
+/* Fix for overlapping numbers in ordered lists */
+ol.bibliography,
+ol.project-list {
+	padding-left: 2.5rem;
+	list-style-position: outside;
+}
+
+ol.bibliography li,
+ol.project-list li {
+	margin-bottom: 1.5rem;
+}
+
+/* Fix button sizing for summary, github, etc. */
+.links a.btn {
+	font-size: 0.9rem !important;
+	padding: 0.25rem 0.75rem !important;
+	border: 1px solid var(--global-theme-color);
+	border-radius: 4px;
+	color: var(--global-theme-color);
+	transition: all 0.2s ease-in-out;
+	margin-top: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+.links a.btn:hover {
+	background-color: var(--global-theme-color) !important;
+	color: var(--global-bg-color) !important;
+	text-decoration: none;
+}
+
+
+/* Fix for abbr badge wrapping in research */
+abbr.badge {
+    white-space: normal !important;
+    word-wrap: break-word;
+    height: auto;
+    padding: 0.3rem !important;
+}
+
+/* Fix news text color in dark mode */
+html[data-theme="dark"] .news table,
+html[data-theme="dark"] .news table th,
+html[data-theme="dark"] .news table td,
+html[data-theme="dark"] .news a.news-title strong {
+    color: #ffffff !important;
+}
+
+/* Fix project summary toggling */
+.project-list .hidden {
+    display: block;
+    max-height: 0px;
+    overflow: hidden;
+    text-align: justify;
+    transition: all 0.15s ease;
+}
+
+.project-list .hidden.open {
+    max-height: 100em;
+    padding-top: 0.5rem;
 }

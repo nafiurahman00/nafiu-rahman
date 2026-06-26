@@ -89,7 +89,7 @@ function populateNews(news) {
 
 	news = news.slice(0, 10);
 
-	var html = '<div class="news-list">';
+	var html = '<div class="news-list" style="margin-top: 2rem;">';
 	news.forEach(function(item) {
 		html += '<div class="news-item" style="display: flex; margin-bottom: 1rem; align-items: flex-start;">';
 		html += '<div class="news-date" style="min-width: 120px; margin-right: 1rem;">';
@@ -174,7 +174,7 @@ function populateProfile(profile) {
 }
 
 function populateEducation(education) {
-	var html = '<div class="education-list">';
+	var html = '<div class="education-list" style="margin-top: 2rem;">';
 	education.forEach(function(edu) {
 		html += '<div class="education-entry" style="margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--global-divider-color, #eee);">';
 		html += '<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.2rem;">';
@@ -276,7 +276,7 @@ function buildPaperItem(paper, index) {
 }
 
 function populateWorkExperience(work) {
-	var html = '<div class="work-list">';
+	var html = '<div class="work-list" style="margin-top: 2rem;">';
 	work.forEach(function(job) {
 		html += '<div class="work-entry" style="margin-bottom: 2.5rem;">';
 		
@@ -328,7 +328,7 @@ function populateWorkExperience(work) {
 }
 
 function populateProjects(projects) {
-	var html = '<ul class="project-list" style="list-style-type: disc; padding-left: 1.5rem; list-style-position: outside;">';
+	var html = '<ul class="project-list" style="margin-top: 2rem; list-style-type: disc; padding-left: 1.5rem; list-style-position: outside;">';
 	projects.forEach(function(project, index) {
 		var projectId = 'project_' + index;
 		html += '<li><div class="project-item">';
@@ -351,7 +351,7 @@ function populateProjects(projects) {
 }
 
 function populateTalks(talks) {
-	var html = '<ul class="talk-list">';
+	var html = '<ul class="talk-list" style="margin-top: 2rem;">';
 	talks.forEach(function(talk) {
 		html += '<li><strong>' + talk.title + '</strong>';
 		if (talk.venue) {
@@ -374,16 +374,16 @@ function populateTalks(talks) {
 }
 
 function populateSkills(skills) {
-	var html = '<div class="skills-container" style="display: flex; flex-direction: column; gap: 1.8rem;">';
+	var html = '<div class="skills-container" style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.8rem;">';
 
 	if (skills.technicalSkills) {
 		for (var category in skills.technicalSkills) {
 			if (skills.technicalSkills.hasOwnProperty(category)) {
 				html += '<div class="skill-category">';
-				html += '<h5 style="margin-bottom: 0.8rem; font-weight: bold; color: var(--global-theme-color, #4274D9); border-bottom: 2px solid var(--global-theme-color, #4274D9); padding-bottom: 0.3rem; display: inline-block;">' + category + '</h5>';
+				html += '<h5 style="margin-bottom: 0.8rem; font-family: inherit; font-weight: bold; color: var(--global-theme-color, #4274D9); border-bottom: 2px solid var(--global-theme-color, #4274D9); padding-bottom: 0.3rem; display: inline-block;">' + category + '</h5>';
 				html += '<div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">';
 				skills.technicalSkills[category].forEach(function(skill) {
-					html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em; font-size: 0.95rem; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' + skill + '</span>';
+					html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em; font-family: inherit; font-size: 0.95rem; font-weight: normal; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' + skill + '</span>';
 				});
 				html += '</div></div>';
 			}
@@ -392,10 +392,10 @@ function populateSkills(skills) {
 
 	if (skills.spokenLanguages) {
 		html += '<div class="skill-category">';
-		html += '<h5 style="margin-bottom: 0.8rem; font-weight: bold; color: var(--global-theme-color, #4274D9); border-bottom: 2px solid var(--global-theme-color, #4274D9); padding-bottom: 0.3rem; display: inline-block;">Spoken Languages</h5>';
+		html += '<h5 style="margin-bottom: 0.8rem; font-family: inherit; font-weight: bold; color: var(--global-theme-color, #4274D9); border-bottom: 2px solid var(--global-theme-color, #4274D9); padding-bottom: 0.3rem; display: inline-block;">Spoken Languages</h5>';
 		html += '<div style="display: flex; flex-wrap: wrap; gap: 0.6rem;">';
 		skills.spokenLanguages.forEach(function(lang) {
-			html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em; font-size: 0.95rem; font-weight: 500; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' + lang + '</span>';
+			html += '<span class="badge rounded" style="background-color: var(--global-bg-color, #fff); color: var(--global-text-color); border: 1px solid var(--global-text-color); padding: 0.4em 0.8em; font-family: inherit; font-size: 0.95rem; font-weight: normal; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' + lang + '</span>';
 		});
 		html += '</div></div>';
 	}
@@ -405,7 +405,7 @@ function populateSkills(skills) {
 }
 
 function populateAchievements(achievements) {
-	var html = '<ul class="award-list">';
+	var html = '<ul class="award-list" style="margin-top: 2rem;">';
 	achievements.forEach(function(item) {
 		html += '<li>' + item + '</li>';
 	});

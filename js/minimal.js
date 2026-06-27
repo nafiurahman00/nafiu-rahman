@@ -4,8 +4,8 @@
 var NAV = [
   { id: 'about',     label: 'About',     href: 'index.html' },
   { id: 'news',      label: 'News',      href: 'news.html' },
-  { id: 'education', label: 'Education', href: 'education.html' },
   { id: 'research',  label: 'Research',  href: 'research.html' },
+  { id: 'education', label: 'Education', href: 'education.html' },
   { id: 'work',      label: 'Work',      href: 'work.html' },
   { id: 'projects',  label: 'Projects',  href: 'projects.html' },
   { id: 'talks',     label: 'Talks',     href: 'talks.html' },

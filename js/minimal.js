@@ -108,7 +108,9 @@ function buildSidebar(profile) {
     html += '<p class="location">' + icon('location') + esc(profile.location) + '</p>';
   }
 
-  html += '<nav class="site-nav"><ul>';
+  html += '<button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">' +
+          '<span></span><span></span><span></span></button>';
+  html += '<nav class="site-nav" id="site-nav"><ul>';
   NAV.forEach(function (n) {
     html += '<li><a href="' + n.href + '"' + (n.id === active ? ' class="active"' : '') + '>' + n.label + '</a></li>';
   });
@@ -124,7 +126,7 @@ function buildSidebar(profile) {
   html += '</div>';
   html += '<div class="contact-note">' + esc(email) + '</div>';
 
-  html += '<div class="sidebar-footer">&copy; ' + new Date().getFullYear() + ' ' + esc(profile.name) +
+  html += '<div class="sidebar-footer" id="sidebar-footer">&copy; ' + new Date().getFullYear() + ' ' + esc(profile.name) +
           '<br>Styled after the <a href="https://github.com/pages-themes/minimal" target="_blank" rel="noopener">minimal</a> theme.</div>';
 
   sidebar.innerHTML = html;
@@ -139,6 +141,59 @@ function buildSidebar(profile) {
       updateThemeIcon(toggle);
     });
   }
+
+  setupNavToggle();
+  setupResponsiveFooter();
+}
+
+/* Mobile hamburger: toggles the nav dropdown and keeps a11y state in sync. */
+function setupNavToggle() {
+  var toggle = document.getElementById('nav-toggle');
+  var nav = document.getElementById('site-nav');
+  if (!toggle || !nav) return;
+
+  function setOpen(open) {
+    nav.classList.toggle('open', open);
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  toggle.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setOpen(!nav.classList.contains('open'));
+  });
+  // close when tapping outside, choosing a link, or pressing Escape
+  document.addEventListener('click', function (e) {
+    if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false);
+  });
+  nav.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') setOpen(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') setOpen(false);
+  });
+}
+
+/* On mobile the layout stacks into one column with the sidebar first, which
+   would leave the footer above the page content. Relocate it below the content
+   on narrow screens and restore it into the sidebar on wide ones. */
+function setupResponsiveFooter() {
+  var footer = document.getElementById('sidebar-footer');
+  var sidebar = document.getElementById('sidebar');
+  var wrapper = document.querySelector('.wrapper');
+  if (!footer || !sidebar || !wrapper) return;
+
+  var mq = window.matchMedia('(max-width: 860px)');
+  function place() {
+    if (mq.matches) {
+      if (footer.parentElement !== wrapper) wrapper.appendChild(footer);
+    } else if (footer.parentElement !== sidebar) {
+      sidebar.appendChild(footer);
+    }
+  }
+  place();
+  if (mq.addEventListener) mq.addEventListener('change', place);
+  else if (mq.addListener) mq.addListener(place);
 }
 
 function updateThemeIcon(btn) {

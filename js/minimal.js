@@ -54,7 +54,7 @@ function getVenueAbbr(paper) {
     var m = paper.venue.match(/\(([A-Z][A-Za-z]*(?:\s[A-Z][A-Za-z]*)*\s\d{4})\)/);
     if (m) return m[1]; // already contains year e.g. "ICSME 2026"
     abbr = paper.venue.split(/\s+/).slice(0, 2).join(' ');
-  } else if (/arxiv/i.test(paper.paperLink || '')) {
+  } else if (/arxiv/i.test(paper.Link || '')) {
     abbr = 'arXiv';
   }
   if (paper.year && !/\d{4}$/.test(abbr)) abbr += ' ' + paper.year;
@@ -294,8 +294,8 @@ function paperItem(p, id, me) {
   var html = '<li class="pub-item">';
   html += '<div class="pub-abbr"><span class="badge">' + esc(getVenueAbbr(p)) + '</span></div>';
   html += '<div class="pub-main" id="' + id + '">';
-  html += '<div class="pub-title">' + (p.paperLink
-    ? '<a href="' + p.paperLink + '" target="_blank" rel="noopener">' + esc(p.title) + '</a>'
+  html += '<div class="pub-title">' + (p.Link
+    ? '<a href="' + p.Link + '" target="_blank" rel="noopener">' + esc(p.title) + '</a>'
     : esc(p.title)) + '</div>';
   html += '<div class="pub-authors">' + highlightAuthor(p.authors, me) + '</div>';
   if (p.venue) {
@@ -306,7 +306,7 @@ function paperItem(p, id, me) {
   html += '<div class="pub-links">';
   if (p.description) html += '<a class="btn abstract-toggle" role="button">Abstract</a>';
   if (p.codeLink) html += '<a class="btn" href="' + p.codeLink + '" target="_blank" rel="noopener">Code</a>';
-  if (p.paperLink) html += '<a class="btn" href="' + p.paperLink + '" target="_blank" rel="noopener">Paper</a>';
+  if (p.preprintLink) html += '<a class="btn" href="' + p.preprintLink + '" target="_blank" rel="noopener">Preprint</a>';
   html += '</div>';
   if (p.description) html += '<div class="abstract hidden"><p>' + esc(p.description) + '</p></div>';
   html += '</div></li>';
@@ -375,7 +375,7 @@ function renderTalks(talks) {
     html += '<div class="pub-links">';
     if (t.videoLink) html += '<a class="btn" href="' + t.videoLink + '" target="_blank" rel="noopener">Video</a>';
     if (t.slidesLink) html += '<a class="btn" href="' + t.slidesLink + '" target="_blank" rel="noopener">Slides</a>';
-    if (t.paperLink) html += '<a class="btn" href="' + t.paperLink + '" target="_blank" rel="noopener">Paper</a>';
+    if (t.preprintLink) html += '<a class="btn" href="' + t.preprintLink + '" target="_blank" rel="noopener">Paper</a>';
     html += '</div></li>';
   });
   html += '</ul>';

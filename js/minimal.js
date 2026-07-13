@@ -267,6 +267,7 @@ function renderEducation(education) {
 function renderResearch(research, me) {
   var sections = [
     { key: 'conferencePapers', label: 'Conference Publications' },
+    { key: 'workshopPapers', label: 'Workshop Publications' },
     { key: 'journalPapers', label: 'Journal Publications' },
     { key: 'manuscriptsUnderReview', label: 'Manuscripts Under Review' },
     { key: 'manuscriptsUnderPreparation', label: 'Manuscripts Under Preparation' },

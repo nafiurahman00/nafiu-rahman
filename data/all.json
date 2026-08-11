@@ -114,6 +114,15 @@
     ],
     "manuscriptsUnderReview": [
       {
+        "title": "From Codebases to LLMs: Non-Inclusive Naming in Linux Foundation Repositories",
+        "authors": "Honghao Tan, Md Nafiu Rahman, Shin Hwei Tan",
+        "Link": "https://arxiv.org/abs/2607.02772",
+        "preprintLink": "https://arxiv.org/abs/2607.02772",
+        "description": "Since 2020, the Linux Foundation and the multi-organization Inclusive Naming Initiative (INI) have encouraged open-source projects to replace non-inclusive terms such as master/slave and whitelist/blacklist. We present NISCAN, a multilingual static-analysis framework that detects non-inclusive terminology across source code and related software artifacts using the INI vocabulary. Using NISCAN, we conduct the first ecosystem-scale study of inclusive naming across 461 Linux Foundation repositories and show substantial progress since 2020 with lingering terminology residue across documentation, comments, configuration files, and other artifacts. We also show that historical naming decisions remain embedded in large language model predictions even after identifiers have been renamed.",
+        "year": "2026",
+        "status": "Under Review at ICSE 2027"
+      },
+      {
         "title": "A Survey on Agentic Security: Applications, Threats and Defenses",
         "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
         "Link": "https://arxiv.org/abs/2510.06445",

@@ -16,6 +16,7 @@ all_data = {
     "achievements": load("achievements.json"),
     "skills":       load("skills.json"),
     "talks":        load("talks.json"),
+    "services":     load("services.json"),
     "coursework":   load("coursework.json"),
     "news":         load("news.json"),  
 }

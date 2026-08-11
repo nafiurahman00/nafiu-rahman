@@ -4,11 +4,12 @@
 var NAV = [
   { id: 'about', label: 'About', href: 'index.html' },
   { id: 'news', label: 'News', href: 'news.html' },
-  { id: 'research', label: 'Research', href: 'research.html' },
+  { id: 'research', label: 'Publications', href: 'research.html' },
   { id: 'education', label: 'Education', href: 'education.html' },
   { id: 'work', label: 'Work', href: 'work.html' },
   { id: 'projects', label: 'Projects', href: 'projects.html' },
   { id: 'talks', label: 'Talks', href: 'talks.html' },
+  { id: 'services', label: 'Services', href: 'services.html' },
   { id: 'skills', label: 'Skills', href: 'skills.html' },
   { id: 'awards', label: 'Awards', href: 'awards.html' }
 ];
@@ -74,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (document.getElementById('work-content')) renderWork(data.work);
       if (document.getElementById('projects-content')) renderProjects(data.projects);
       if (document.getElementById('talks-content')) renderTalks(data.talks);
+      if (document.getElementById('services-content')) renderServices(data.services);
       if (document.getElementById('skills-content')) renderSkills(data.skills);
       if (document.getElementById('awards-content')) renderAwards(data.achievements);
       initAbstractToggles();
@@ -222,6 +224,7 @@ function renderAbout(profile) {
     }).join(' ');
     html += '</p>';
   }
+  html += '<p>All my publications can be seen <a href="research.html">here</a>.</p>';
   document.getElementById('about-content').innerHTML = html;
 }
 
@@ -381,6 +384,37 @@ function renderTalks(talks) {
   });
   html += '</ul>';
   document.getElementById('talks-content').innerHTML = html;
+}
+
+function renderServices(services) {
+  if (!services || typeof services !== 'object') {
+    document.getElementById('services-content').innerHTML = '<p>No services listed yet.</p>';
+    return;
+  }
+
+  var keys = Object.keys(services);
+  if (!keys.length) {
+    document.getElementById('services-content').innerHTML = '<p>No services listed yet.</p>';
+    return;
+  }
+
+  var html = '';
+  keys.forEach(function (category) {
+    var entries = services[category];
+    if (!Array.isArray(entries) || !entries.length) return;
+
+    var label = category.replace(/([A-Z])/g, ' $1').replace(/^./, function (c) { return c.toUpperCase(); });
+    html += '<h2 class="section-title">' + esc(label) + '</h2><ul class="award-list">';
+    entries.forEach(function (item) {
+      var role = item.role ? esc(item.role) : '';
+      var line = role;
+      if (item.link) line = '<a href="' + item.link + '" target="_blank" rel="noopener">' + line + '</a>';
+      html += '<li>' + line + '</li>';
+    });
+    html += '</ul>';
+  });
+
+  document.getElementById('services-content').innerHTML = html || '<p>No services listed yet.</p>';
 }
 
 function renderSkills(skills) {

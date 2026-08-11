@@ -358,6 +358,19 @@
       "slidesLink": "https://drive.google.com/file/d/1N8LJl50T6ttlCd_Fol6J8EO92jj0PBhh/view?usp=drive_link"
     }
   ],
+  "services": {
+    "reviewer": [
+      {
+        "role": "Reviewer, ACL ARR May 2026",
+        "link": "https://openreview.net/group?id=aclweb.org/ACL/ARR/2026/May"
+      }
+    ],
+    "organizing": [
+      {
+        "role": "Organizer, BUET CSE Fest 2024"
+      }
+    ]
+  },
   "coursework": [
     "Software Engineering",
     "Machine Learning",

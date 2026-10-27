@@ -1,13 +1,13 @@
 {
   "name": "Md Nafiu Rahman",
-  "title": "CS Graduate | Bangladesh University of Engineering and Technology",
+  "title": "Lecturer | BRAC University",
   "location": "Dhaka, Bangladesh",
   "email": "nafiu [dot] rahman [at] gmail [dot] com",
   "phone": "+88 01933-002218",
   "googlescholar": "https://scholar.google.com/citations?user=VComsdEAAAAJ&hl=en",
   "linkedin": "https://www.linkedin.com/in/mdnafiurahman/",
   "github": "https://github.com/nafiurahman00",
-  "bio": "Hi! I am a Lecturer at BRAC University and a Summer Research Intern at UIUC. I graduated with honors in CSE from BUET in 2025, where my thesis sparked my passion for Software Engineering research. My work focuses on AI4SE, specifically leveraging Large Language Models to solve complex problems like secret detection and code generation. My long-term goal is to build intelligent tools that improve developer productivity and software reliability.",
+  "bio": "Hi! I am a Lecturer at BRAC University. In Summer 2026, I was a Summer Research Intern at UIUC through the UIUC++ SRSE program. I graduated with honors in CSE from BUET in 2025, where my thesis sparked my passion for Software Engineering research. My work focuses on AI4SE, specifically using Large Language Models for software security problems such as secret detection, and on software testing, where I study whether tests actually check the behavior they cover. My long-term goal is to build intelligent tools that improve developer productivity and software reliability.",
   "image": "img/nfu.jpg",
   "imagecaption": "Picture taken at Phe Phe Falls",
   "cv": "cv/Md_Nafiu_Rahman_Resume.pdf",
@@ -15,6 +15,8 @@
   "researchInterests": [
     "Software Engineering",
     "LLM applications in Software Engineering",
+    "Software Testing",
+    "Software Security",
     "Empirical Software Engineering"
   ],
   "facultySites": [

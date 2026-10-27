@@ -1,14 +1,14 @@
 {
   "profile": {
     "name": "Md Nafiu Rahman",
-    "title": "CS Graduate | Bangladesh University of Engineering and Technology",
+    "title": "Lecturer | BRAC University",
     "location": "Dhaka, Bangladesh",
     "email": "nafiu [dot] rahman [at] gmail [dot] com",
     "phone": "+88 01933-002218",
     "googlescholar": "https://scholar.google.com/citations?user=VComsdEAAAAJ&hl=en",
     "linkedin": "https://www.linkedin.com/in/mdnafiurahman/",
     "github": "https://github.com/nafiurahman00",
-    "bio": "Hi! I am a Lecturer at BRAC University and a Summer Research Intern at UIUC. I graduated with honors in CSE from BUET in 2025, where my thesis sparked my passion for Software Engineering research. My work focuses on AI4SE, specifically leveraging Large Language Models to solve complex problems like secret detection and code generation. My long-term goal is to build intelligent tools that improve developer productivity and software reliability.",
+    "bio": "Hi! I am a Lecturer at BRAC University. In Summer 2026, I was a Summer Research Intern at UIUC through the UIUC++ SRSE program. I graduated with honors in CSE from BUET in 2025, where my thesis sparked my passion for Software Engineering research. My work focuses on AI4SE, specifically using Large Language Models for software security problems such as secret detection, and on software testing, where I study whether tests actually check the behavior they cover. My long-term goal is to build intelligent tools that improve developer productivity and software reliability.",
     "image": "img/nfu.jpg",
     "imagecaption": "Picture taken at Phe Phe Falls",
     "cv": "cv/Md_Nafiu_Rahman_Resume.pdf",
@@ -16,6 +16,8 @@
     "researchInterests": [
       "Software Engineering",
       "LLM applications in Software Engineering",
+      "Software Testing",
+      "Software Security",
       "Empirical Software Engineering"
     ],
     "facultySites": [
@@ -145,6 +147,24 @@
     "manuscriptsUnderPreparation": [],
     "preprints": [
       {
+        "title": "Covered Is Not Checked: Which Branch Outcomes Would Your Tests Notice?",
+        "authors": "Md Nafiu Rahman, Cemil Canbaz, Soneya Binta Hossain",
+        "Link": "https://arxiv.org/abs/2610.33708",
+        "preprintLink": "https://arxiv.org/abs/2610.33708",
+        "description": "Code coverage reports what tests execute, not whether tests detect faults. Checked coverage addresses this gap by tracing code that influences test oracles through dynamic slicing, but slicing is costly, and Java slicers struggle with modern language features and complex programs. We present Veritas, a slicing-free approach that directly tests whether covered behavior is checked. We target object branch coverage (OBC), a compiled-code structural criterion with fault-detection effectiveness comparable to source-level Modified Condition/Decision Coverage (MC/DC), which is required at the highest assurance level of DO-178C. For each covered object-branch outcome, Veritas forces the opposite outcome and credits checking only when the change is executed, a previously passing test fails, and the failure is attributable to that outcome. Thus, Veritas distinguishes execution from demonstrated fault detection without dynamic dependence analysis. We evaluated Veritas on eleven open-source Java projects containing 51,382 object-branch outcomes. We find that 18% of covered outcomes can be changed without failing any test, exposing weaknesses hidden by coverage. Among surviving mutants, about half are never activated by test inputs, while the rest are activated but undetected. Compared with slicing-based checked coverage, Veritas identifies 4,763 cases where tests detect a change that slicing does not credit, while 19% of cases credited by slicing produce no detected failure when changed. Weakening assertions increases this gap and reduces fault detection in every project. Moreover, code locations controlled by weakly checked outcomes are 12.4-54.7 percentage points more likely to have an undetected independent fault than locations controlled by checked outcomes. These findings show that directly testing outcomes provides actionable evidence of oracle effectiveness beyond structural coverage.",
+        "year": "2026",
+        "status": "Preprint"
+      },
+      {
+        "title": "AgentTell: Behavioural Side-Channel Leakage in Browser-Use Agents",
+        "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
+        "Link": "https://arxiv.org/abs/2609.32915",
+        "preprintLink": "https://arxiv.org/abs/2609.32915",
+        "description": "Browser-use agents often carry information in their context as they move between websites. While it may be necessary for task completion, it also creates a privacy risk, especially when the information contains a private fact regarding the user. For example, an agent may learn a user's affiliation after reading a membership record. If it later selects a registration option specific to that affiliation on another website instead of a general option, the information gets leaked. In this work, we define and study behavioural side-channel leakage in browser-use agents, where an agent's actions inadvertently reveal private information (secret) retained from a prior website, despite an explicit instruction not to disclose it. We introduce AgentTell, a benchmark of 20 scenarios and 100 tasks in which an agent acquires a secret on one website and then completes a task on another website that offers secret-specific actions alongside a general action that reveals nothing. Our evaluation across 9,760 sessions on six backbones shows that agents carrying a secret reveal it through their actions in 61.1% of sessions. Even when agents explicitly state in memory that the secret must not be shared, they still reveal it in 56.7% of those sessions. Moreover, in 34.5% of leaking sessions, their final responses falsely assure users that the secret was not disclosed. These findings show that agents often fail to recognize side-channel leakage as a privacy risk.",
+        "year": "2026",
+        "status": "Preprint"
+      },
+      {
         "title": "EVCC: Enhanced Vision Transformer-ConvNeXt-CoAtNet Fusion with Adaptive Routing for Classification",
         "authors": "Kazi Reyazul Hasan, Md Nafiu Rahman, Sadif Ahmed, Wasif Jalal, Shahriar Raj, Mubasshira Musarrat, Muhammad Abdullah Adnan",
         "Link": "https://arxiv.org/abs/2511.18691",
@@ -247,11 +267,11 @@
       "companyLink": "https://www.shinhwei.com/",
       "department": "UIUC++ Summer Research in Software Engineering (SRSE) 2026",
       "location": "Urbana-Champaign, IL",
-      "duration": "May 2026 – Present",
+      "duration": "May 2026 – July 2026",
       "startDate": "May 2026",
-      "endDate": "Present",
+      "endDate": "July 2026",
       "type": "Research Internship",
-      "description": "Working as a Summer Research Intern under the supervision of <a href=\"https://www.shinhwei.com/\" target=\"_blank\" rel=\"external nofollow noopener\">Dr. Shin Hwei Tan</a> as part of the UIUC++ SRSE program."
+      "description": "Worked as a Summer Research Intern under the supervision of <a href=\"https://www.shinhwei.com/\" target=\"_blank\" rel=\"external nofollow noopener\">Dr. Shin Hwei Tan</a> as part of the UIUC++ SRSE program."
     },
     {
       "title": "Lecturer",
@@ -394,6 +414,24 @@
     "Object Oriented Programming"
   ],
   "news": [
+    {
+      "date": "October 2026",
+      "title": "New Preprint: Covered Is Not Checked",
+      "description": "Our preprint 'Covered Is Not Checked: Which Branch Outcomes Would Your Tests Notice?' with Cemil Canbaz and Dr. Soneya Binta Hossain is now on arXiv. We present Veritas, a slicing-free approach for measuring which covered branch outcomes are actually checked by tests.",
+      "link": "https://arxiv.org/abs/2610.33708"
+    },
+    {
+      "date": "September 2026",
+      "title": "New Preprint: AgentTell",
+      "description": "Our preprint 'AgentTell: Behavioural Side-Channel Leakage in Browser-Use Agents' is now on arXiv.",
+      "link": "https://arxiv.org/abs/2609.32915"
+    },
+    {
+      "date": "July 2026",
+      "title": "New Preprint on Non-Inclusive Naming",
+      "description": "Our preprint 'From Codebases to LLMs: Non-Inclusive Naming in Linux Foundation Repositories' with Honghao Tan and Dr. Shin Hwei Tan is now on arXiv.",
+      "link": "https://arxiv.org/abs/2607.02772"
+    },
     {
       "date": "May 2026",
       "title": "Summer Research Intern at UIUC",

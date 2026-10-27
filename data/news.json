@@ -1,5 +1,23 @@
 [
   {
+    "date": "October 2026",
+    "title": "New Preprint: Covered Is Not Checked",
+    "description": "Our preprint 'Covered Is Not Checked: Which Branch Outcomes Would Your Tests Notice?' with Cemil Canbaz and Dr. Soneya Binta Hossain is now on arXiv. We present Veritas, a slicing-free approach for measuring which covered branch outcomes are actually checked by tests.",
+    "link": "https://arxiv.org/abs/2610.33708"
+  },
+  {
+    "date": "September 2026",
+    "title": "New Preprint: AgentTell",
+    "description": "Our preprint 'AgentTell: Behavioural Side-Channel Leakage in Browser-Use Agents' is now on arXiv.",
+    "link": "https://arxiv.org/abs/2609.32915"
+  },
+  {
+    "date": "July 2026",
+    "title": "New Preprint on Non-Inclusive Naming",
+    "description": "Our preprint 'From Codebases to LLMs: Non-Inclusive Naming in Linux Foundation Repositories' with Honghao Tan and Dr. Shin Hwei Tan is now on arXiv.",
+    "link": "https://arxiv.org/abs/2607.02772"
+  },
+  {
     "date": "May 2026",
     "title": "Summer Research Intern at UIUC",
     "description": "Joined as a Summer Research Intern at the University of Illinois Urbana-Champaign (UIUC) under the UIUC++ Summer Research in Software Engineering (SRSE) 2026 program, supervised by <a href=\"https://www.shinhwei.com/\" target=\"_blank\" rel=\"external nofollow noopener\">Dr. Shin Hwei Tan</a>.",

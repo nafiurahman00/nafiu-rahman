@@ -45,7 +45,10 @@ function esc(s) {
 function highlightAuthor(authors, me) {
   if (!me) return authors;
   return authors.split(',').map(function (a) {
-    return a.trim() === me ? '<strong>' + a.trim() + '</strong>' : a.trim();
+    var name = a.trim();
+    var equal = name.slice(-1) === '*'; // trailing * marks equal contribution
+    if (equal) name = name.slice(0, -1);
+    return (name === me ? '<strong>' + name + '</strong>' : name) + (equal ? '<sup>*</sup>' : '');
   }).join(', ');
 }
 
@@ -276,7 +279,7 @@ function renderResearch(research, me) {
     { key: 'manuscriptsUnderPreparation', label: 'Manuscripts Under Preparation' },
     { key: 'preprints', label: 'Preprints' }
   ];
-  var html = '';
+  var html = '<p class="pub-status"><sup>*</sup> Equal contribution</p>';
   sections.forEach(function (sec) {
     var papers = research[sec.key];
     if (!papers || !papers.length) return;
@@ -310,6 +313,7 @@ function paperItem(p, id, me) {
   html += '<div class="pub-links">';
   if (p.description) html += '<a class="btn abstract-toggle" role="button">Abstract</a>';
   if (p.codeLink) html += '<a class="btn" href="' + p.codeLink + '" target="_blank" rel="noopener">Code</a>';
+  if (p.pdfLink) html += '<a class="btn" href="' + p.pdfLink + '" target="_blank" rel="noopener">PDF</a>';
   if (p.preprintLink) html += '<a class="btn" href="' + p.preprintLink + '" target="_blank" rel="noopener">Preprint</a>';
   html += '</div>';
   if (p.description) html += '<div class="abstract hidden"><p>' + esc(p.description) + '</p></div>';

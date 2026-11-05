@@ -69,7 +69,7 @@
       },
       {
         "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
-        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Gias Uddin, Rifat Shahriyar",
+        "authors": "Md Nafiu Rahman*, Sadif Ahmed*, Zahin Wahab, Gias Uddin, Rifat Shahriyar",
         "venue": "ACM International Conference on the Foundations of Software Engineering (FSE 2026), Tool Demo Track",
         "Link": "https://dl.acm.org/doi/10.1145/3803437.3806406",
         "preprintLink": "https://arxiv.org/pdf/2602.08072v3",
@@ -80,7 +80,7 @@
       },
       {
         "title": "Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation",
-        "authors": "Sadif Ahmed, Md Nafiu Rahman, Zahin Wahab, Gias Uddin, Rifat Shahriyar",
+        "authors": "Sadif Ahmed*, Md Nafiu Rahman*, Zahin Wahab*, Gias Uddin, Rifat Shahriyar",
         "venue": "IEEE/ACM International Conference on Mining Software Repositories (MSR 2026), Technical Track",
         "Link": "https://dl.acm.org/doi/10.1145/3793302.3793348",
         "preprintLink": "https://arxiv.org/abs/2410.23657",
@@ -91,7 +91,7 @@
       },
       {
         "title": "Secret Breach Detection in Source Code with Large Language Models",
-        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, S. M. Sohan, Rifat Shahriyar",
+        "authors": "Md Nafiu Rahman*, Sadif Ahmed*, Zahin Wahab*, S. M. Sohan, Rifat Shahriyar",
         "venue": "ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM 2025), Technical Track",
         "Link": "https://ieeexplore.ieee.org/abstract/document/11323433",
         "preprintLink": "https://arxiv.org/abs/2504.18784",
@@ -117,11 +117,11 @@
     "journalPapers": [
       {
         "title": "A Survey on Agentic Security: Applications, Threats and Defenses",
-        "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
+        "authors": "Asif Shahriar*, Md Nafiu Rahman*, Sadif Ahmed*, Farig Sadeque, Md Rizwan Parvez",
         "venue": "Transactions on Machine Learning Research (TMLR 2026)",
         "Link": "https://openreview.net/forum?id=Od4ZnAUv9T",
-        "preprintLink": "https://arxiv.org/abs/2510.06445",
-        "description": "In this work we present the first holistic survey of the agentic security landscape, structuring the field around three fundamental pillars: Applications, Threats, and Defenses. We provide a comprehensive taxonomy of over 160 papers, explaining how agents are used in downstream cybersecurity applications, inherent threats to agentic systems, and countermeasures designed to protect them. A detailed cross-cutting analysis shows emerging trends in agent architecture while revealing critical research gaps in model and modality coverage. A complete and continuously updated list of all surveyed papers is publicly available at https://github.com/kagnlp/Awesome-Agentic-Security",
+        "pdfLink": "https://arxiv.org/pdf/2510.06445v4",
+        "description": "LLM-based agents are now used throughout cybersecurity. On one hand, these agents enable powerful and autonomous security applications. On the other hand, they open new attack surfaces, prompting the security community to build defenses. As the literature in this domain grows rapidly, there is a lack of a holistic study that explains how agents are used in downstream cybersecurity applications, inherent threats to agentic systems, and countermeasures designed to protect them. In this work we present the first holistic survey of the agentic security landscape, structuring the field around the fundamental pillars of Applications, Threats and Defenses. We provide a comprehensive taxonomy of 274 papers that covers red-teaming, blue-teaming and domain-specific applications, attack surfaces on agentic systems, defense techniques, and both offensive and defensive evaluation frameworks. For each pillar, we first discuss the literature around the taxonomy and then perform a quantitative analysis to understand the patterns across these works. For the applications, we show their security-lifecycle coverage map, compare between red-teaming and blue-teaming agents, and analyze the adversarial use of red-teaming applications. On the threat side, we analyze the entry points and agent-loop stages that attacks target, their specificity to the agentic setting, and the threat models they assume. On the defense side, we analyze the prevailing defense strategies, their cost and security trade-offs, and where in the agent lifecycle they are deployed. Finally, we provide a detailed cross-cutting analysis, where we map which defenses cover which attack classes and chart trends in agent architecture, backbone model usage, and data modality coverage. Taken together, these findings give a researcher a structural understanding of how agentic capabilities, vulnerabilities, and countermeasures relate to one another, and to identify where the field is concentrated and where it is thin. A complete and continuously updated list of all surveyed papers is publicly available at https://github.com/kagnlp/Awesome-Agentic-Security.",
         "year": "2026",
         "status": "Accepted"
       }
@@ -129,7 +129,7 @@
     "manuscriptsUnderReview": [
       {
         "title": "Covered Is Not Checked: Which Branch Outcomes Would Your Tests Notice?",
-        "authors": "Md Nafiu Rahman, Cemil Canbaz, Soneya Binta Hossain",
+        "authors": "Md Nafiu Rahman*, Cemil Canbaz*, Soneya Binta Hossain",
         "Link": "https://arxiv.org/abs/2610.33708",
         "preprintLink": "https://arxiv.org/abs/2610.33708",
         "description": "Code coverage reports what tests execute, not whether tests detect faults. Checked coverage addresses this gap by tracing code that influences test oracles through dynamic slicing, but slicing is costly, and Java slicers struggle with modern language features and complex programs. We present Veritas, a slicing-free approach that directly tests whether covered behavior is checked. We target object branch coverage (OBC), a compiled-code structural criterion with fault-detection effectiveness comparable to source-level Modified Condition/Decision Coverage (MC/DC), which is required at the highest assurance level of DO-178C. For each covered object-branch outcome, Veritas forces the opposite outcome and credits checking only when the change is executed, a previously passing test fails, and the failure is attributable to that outcome. Thus, Veritas distinguishes execution from demonstrated fault detection without dynamic dependence analysis. We evaluated Veritas on eleven open-source Java projects containing 51,382 object-branch outcomes. We find that 18% of covered outcomes can be changed without failing any test, exposing weaknesses hidden by coverage. Among surviving mutants, about half are never activated by test inputs, while the rest are activated but undetected. Compared with slicing-based checked coverage, Veritas identifies 4,763 cases where tests detect a change that slicing does not credit, while 19% of cases credited by slicing produce no detected failure when changed. Weakening assertions increases this gap and reduces fault detection in every project. Moreover, code locations controlled by weakly checked outcomes are 12.4-54.7 percentage points more likely to have an undetected independent fault than locations controlled by checked outcomes. These findings show that directly testing outcomes provides actionable evidence of oracle effectiveness beyond structural coverage.",
@@ -138,7 +138,7 @@
       },
       {
         "title": "AgentTell: Behavioural Side-Channel Leakage in Browser-Use Agents",
-        "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
+        "authors": "Asif Shahriar*, Md Nafiu Rahman*, Sadif Ahmed*, Farig Sadeque, Md Rizwan Parvez",
         "Link": "https://arxiv.org/abs/2609.32915",
         "preprintLink": "https://arxiv.org/abs/2609.32915",
         "description": "Browser-use agents often carry information in their context as they move between websites. While it may be necessary for task completion, it also creates a privacy risk, especially when the information contains a private fact regarding the user. For example, an agent may learn a user's affiliation after reading a membership record. If it later selects a registration option specific to that affiliation on another website instead of a general option, the information gets leaked. In this work, we define and study behavioural side-channel leakage in browser-use agents, where an agent's actions inadvertently reveal private information (secret) retained from a prior website, despite an explicit instruction not to disclose it. We introduce AgentTell, a benchmark of 20 scenarios and 100 tasks in which an agent acquires a secret on one website and then completes a task on another website that offers secret-specific actions alongside a general action that reveals nothing. Our evaluation across 9,760 sessions on six backbones shows that agents carrying a secret reveal it through their actions in 61.1% of sessions. Even when agents explicitly state in memory that the secret must not be shared, they still reveal it in 56.7% of those sessions. Moreover, in 34.5% of leaking sessions, their final responses falsely assure users that the secret was not disclosed. These findings show that agents often fail to recognize side-channel leakage as a privacy risk.",

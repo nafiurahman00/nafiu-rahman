@@ -10,12 +10,11 @@
 	<link rel="canonical" href="https://nafiurahman00.github.io/research.html">
 	<link rel="shortcut icon" type="image/png" href="img/icon.ico" />
 	<link rel="preload" href="data/all.json" as="fetch" crossorigin>
-	<link rel="preload" href="img/nfu.webp" as="image" type="image/webp">
 
 	<script>(function () { try { var t = localStorage.getItem('theme'); if (!t) t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light'; document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();</script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&display=swap">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap">
 	<link rel="stylesheet" href="assets/css/minimal.css">
 
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZV0B4L7RW1"></script>
@@ -28,14 +27,15 @@
 </head>
 
 <body>
+	<header class="topbar" id="topbar"></header>
 	<div class="wrapper">
-		<header class="sidebar" id="sidebar"></header>
 		<section data-page="research">
 			<h1 class="page-title">Publications</h1>
 			<div id="research-content"><p class="loading">Loading…</p></div>
 			<div id="research-wordcloud"></div>
 		</section>
 	</div>
+	<footer class="site-footer" id="site-footer"></footer>
 	<script src="js/minimal.js" defer></script>
 </body>
 

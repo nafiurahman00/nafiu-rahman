@@ -1,5 +1,5 @@
-/* Minimal-theme renderer: builds the sidebar (navbar + profile) and the
-   per-page content from data/all.json. Single source of truth = the JSON. */
+/* Renderer: builds the top bar, footer and the per-page content from
+   data/all.json. Single source of truth = the JSON. */
 
 var NAV = [
   { id: 'about', label: 'About', href: 'index.html' },
@@ -14,25 +14,10 @@ var NAV = [
   { id: 'awards', label: 'Awards', href: 'awards.html' }
 ];
 
-/* Inline SVG icons — replaces the FontAwesome + Academicons web-font CDNs so
-   the page needs no render-blocking icon stylesheets or font downloads. */
-var ICON_PATHS = {
-  location: ['0 0 384 512', 'M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z'],
-  envelope: ['0 0 512 512', 'M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z'],
-  github: ['0 0 496 512', 'M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z'],
-  linkedin: ['0 0 448 512', 'M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z'],
-  scholar: ['0 0 512 512', 'M256 411.12L0 202.667 256 0l256 202.667zM256 444.44L93.07 313.78v98.99c0 35.41 72.96 64.13 162.93 64.13s162.93-28.72 162.93-64.13v-98.99z'],
-  cv: ['0 0 384 512', 'M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM112 256l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z'],
-  sun: ['0 0 512 512', 'M256 152a104 104 0 1 0 0 208a104 104 0 1 0 0-208zm0-120c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V48c0-8.8 7.2-16 16-16zm0 368c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16s-16-7.2-16-16v-48c0-8.8 7.2-16 16-16zM48 240h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H48c-8.8 0-16-7.2-16-16s7.2-16 16-16zm368 0h48c8.8 0 16 7.2 16 16s-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16s7.2-16 16-16zM107 107c6.2-6.2 16.4-6.2 22.6 0l34 34c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-34-34c-6.2-6.2-6.2-16.4 0-22.6zm241.4 241.4c6.2-6.2 16.4-6.2 22.6 0l34 34c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0l-34-34c-6.2-6.2-6.2-16.4 0-22.6zM107 405c-6.2-6.2-6.2-16.4 0-22.6l34-34c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-34 34c-6.2 6.2-16.4 6.2-22.6 0zm241.4-241.4c-6.2-6.2-6.2-16.4 0-22.6l34-34c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-34 34c-6.2 6.2-16.4 6.2-22.6 0z'],
-  moon: ['0 0 512 512', 'M352 480c-141.4 0-256-114.6-256-256c0-91.5 48-171.8 120.1-217.1c8.7-5.5 19.9 2.1 17.9 12.1C228.7 43.7 224 69.5 224 96c0 123.7 100.3 224 224 224c26.5 0 52.3-4.7 77-12c10-2.9 17.6 9.2 12.1 17.9C491.8 432 411.5 480 320 480h32z']
-};
-
-function icon(name) {
-  var p = ICON_PATHS[name];
-  if (!p) return '';
-  return '<svg class="icon" viewBox="' + p[0] + '" aria-hidden="true" focusable="false">' +
-    '<path fill="currentColor" d="' + p[1] + '"/></svg>';
-}
+/* Half-filled circle: one icon that reads the same in both themes. */
+var THEME_ICON = '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">' +
+  '<circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor"/>' +
+  '<path fill="currentColor" d="M8 1.5a6.5 6.5 0 0 1 0 13z"/></svg>';
 
 function decodeEmail(email) {
   return email.replace(/ \[dot\] /g, '.').replace(/ \[at\] /g, '@');
@@ -40,6 +25,24 @@ function decodeEmail(email) {
 
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function extLink(href, text) {
+  return '<a href="' + href + '" target="_blank" rel="noopener">' + text + '</a>';
+}
+
+/* The site's one list layout: a label in the margin, the content beside it. */
+function row(label, body, id) {
+  return '<li class="row"><div class="row-label">' + esc(label) + '</div>' +
+    '<div class="row-body"' + (id ? ' id="' + id + '"' : '') + '>' + body + '</div></li>';
+}
+
+function abstractToggle(label) {
+  return '<button class="abstract-toggle" type="button" aria-expanded="false">' + label + '</button>';
+}
+
+function abstractPanel(text) {
+  return '<div class="abstract" hidden><p>' + esc(text) + '</p></div>';
 }
 
 function highlightAuthor(authors, me) {
@@ -69,10 +72,12 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('data/all.json')
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      buildSidebar(data.profile);
-      var page = (document.querySelector('section[data-page]') || {}).dataset;
+      var page = (document.querySelector('section[data-page]') || { dataset: {} }).dataset.page;
+      buildTopbar(data.profile, page);
+      buildFooter(data.profile, page);
       if (document.getElementById('about-content')) renderAbout(data.profile);
-      if (document.getElementById('news-content')) renderNews(data.news);
+      if (document.getElementById('recent-news')) renderNews(data.news, 'recent-news', RECENT_NEWS);
+      if (document.getElementById('news-content')) renderNews(data.news, 'news-content');
       if (document.getElementById('education-content')) renderEducation(data.education);
       if (document.getElementById('research-content')) renderResearch(data.research, data.profile.name);
       if (document.getElementById('work-content')) renderWork(data.work);
@@ -86,152 +91,106 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(function (err) { console.error('Error loading data:', err); });
 });
 
-/* ------------------------------------------------------------- sidebar */
+/* ------------------------------------------------------------- top bar + footer */
 
-function buildSidebar(profile) {
-  var sidebar = document.getElementById('sidebar');
-  if (!sidebar) return;
-  var active = (document.querySelector('section[data-page]') || { dataset: {} }).dataset.page;
-  var email = decodeEmail(profile.email);
+function buildTopbar(profile, active) {
+  var bar = document.getElementById('topbar');
+  if (!bar) return;
 
-  var html = '';
-  if (profile.image) {
-    var webp = profile.image.replace(/\.(jpe?g|png)$/i, '.webp');
-    var alt = esc(profile.imagecaption || profile.name);
-    html += '<picture>' +
-      '<source srcset="' + webp + '" type="image/webp">' +
-      '<img class="profile-photo" src="' + profile.image + '" alt="' + alt +
-      '" width="400" height="403" loading="eager" decoding="async" fetchpriority="high">' +
-      '</picture>';
-  }
-  if (profile.imagecaption) {
-    html += '<p class="photo-caption">' + esc(profile.imagecaption) + '</p>';
-  }
-  html += '<h1 class="site-title"><a href="index.html">' + esc(profile.name) + '</a></h1>';
-  html += '<p class="tagline">' + esc(profile.title) + '</p>';
-  if (profile.location) {
-    html += '<p class="location">' + icon('location') + esc(profile.location) + '</p>';
-  }
-
-  html += '<button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="site-nav">' +
-    '<span></span><span></span><span></span></button>';
-  html += '<nav class="site-nav" id="site-nav"><ul>';
+  var html = '<div class="topbar-inner"><a class="brand" href="index.html">' + esc(profile.name) + '</a>';
+  html += '<nav class="site-nav" aria-label="Main"><ul>';
   NAV.forEach(function (n) {
-    html += '<li><a href="' + n.href + '"' + (n.id === active ? ' class="active"' : '') + '>' + n.label + '</a></li>';
+    html += '<li><a href="' + n.href + '"' + (n.id === active ? ' class="active" aria-current="page"' : '') + '>' + n.label + '</a></li>';
   });
   html += '</ul></nav>';
-
-  html += '<div class="social-links">';
-  if (profile.cv) html += '<a href="' + profile.cv + '" target="_blank" title="CV">' + icon('cv') + '</a>';
-  html += '<a href="mailto:' + email + '" title="Email">' + icon('envelope') + '</a>';
-  if (profile.github) html += '<a href="' + profile.github + '" target="_blank" rel="noopener" title="GitHub">' + icon('github') + '</a>';
-  if (profile.linkedin) html += '<a href="' + profile.linkedin + '" target="_blank" rel="noopener" title="LinkedIn">' + icon('linkedin') + '</a>';
-  if (profile.googlescholar) html += '<a href="' + profile.googlescholar + '" target="_blank" rel="noopener" title="Google Scholar">' + icon('scholar') + '</a>';
-  html += '<button class="theme-toggle" id="theme-toggle" type="button" title="Toggle dark mode" aria-label="Toggle dark mode"></button>';
-  html += '</div>';
-  html += '<div class="contact-note">' + esc(email) + '</div>';
-
-  html += '<div class="sidebar-footer" id="sidebar-footer">&copy; ' + new Date().getFullYear() + ' ' + esc(profile.name) +
-    '<br>Styled after the <a href="https://github.com/pages-themes/minimal" target="_blank" rel="noopener">minimal</a> theme.</div>';
-
-  sidebar.innerHTML = html;
+  html += '<button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">' + THEME_ICON + '</button></div>';
+  bar.innerHTML = html;
 
   var toggle = document.getElementById('theme-toggle');
-  if (toggle) {
-    updateThemeIcon(toggle);
-    toggle.addEventListener('click', function () {
-      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      try { localStorage.setItem('theme', next); } catch (e) { }
-      updateThemeIcon(toggle);
-    });
-  }
-
-  setupNavToggle();
-  setupResponsiveFooter();
-}
-
-/* Mobile hamburger: toggles the nav dropdown and keeps a11y state in sync. */
-function setupNavToggle() {
-  var toggle = document.getElementById('nav-toggle');
-  var nav = document.getElementById('site-nav');
-  if (!toggle || !nav) return;
-
-  function setOpen(open) {
-    nav.classList.toggle('open', open);
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  }
-
-  toggle.addEventListener('click', function (e) {
-    e.stopPropagation();
-    setOpen(!nav.classList.contains('open'));
-  });
-  // close when tapping outside, choosing a link, or pressing Escape
-  document.addEventListener('click', function (e) {
-    if (nav.classList.contains('open') && !nav.contains(e.target)) setOpen(false);
-  });
-  nav.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') setOpen(false);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') setOpen(false);
+  updateThemeTitle(toggle);
+  toggle.addEventListener('click', function () {
+    var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) { }
+    updateThemeTitle(toggle);
   });
 }
 
-/* On mobile the layout stacks into one column with the sidebar first, which
-   would leave the footer above the page content. Relocate it below the content
-   on narrow screens and restore it into the sidebar on wide ones. */
-function setupResponsiveFooter() {
-  var footer = document.getElementById('sidebar-footer');
-  var sidebar = document.getElementById('sidebar');
-  var wrapper = document.querySelector('.wrapper');
-  if (!footer || !sidebar || !wrapper) return;
-
-  var mq = window.matchMedia('(max-width: 860px)');
-  function place() {
-    if (mq.matches) {
-      if (footer.parentElement !== wrapper) wrapper.appendChild(footer);
-    } else if (footer.parentElement !== sidebar) {
-      sidebar.appendChild(footer);
-    }
-  }
-  place();
-  if (mq.addEventListener) mq.addEventListener('change', place);
-  else if (mq.addListener) mq.addListener(place);
-}
-
-function updateThemeIcon(btn) {
+function updateThemeTitle(btn) {
   var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-  btn.innerHTML = dark ? icon('sun') : icon('moon');
   btn.setAttribute('title', dark ? 'Switch to light mode' : 'Switch to dark mode');
+}
+
+function profileLinks(profile) {
+  var html = '';
+  if (profile.cv) html += '<a href="' + profile.cv + '" target="_blank">CV</a>';
+  html += '<a href="mailto:' + decodeEmail(profile.email) + '">Email</a>';
+  if (profile.github) html += extLink(profile.github, 'GitHub');
+  if (profile.linkedin) html += extLink(profile.linkedin, 'LinkedIn');
+  if (profile.googlescholar) html += extLink(profile.googlescholar, 'Google Scholar');
+  return html;
+}
+
+function contactLine(profile) {
+  return [profile.location, decodeEmail(profile.email)].filter(Boolean).map(esc).join(' · ');
+}
+
+/* The home page shows the links and contact line at the top instead. */
+function buildFooter(profile, active) {
+  var footer = document.getElementById('site-footer');
+  if (!footer) return;
+  var html = '';
+  if (active !== 'about') {
+    html += '<p class="slashed">' + profileLinks(profile) + '</p>' +
+      '<p>' + esc(profile.title) + ' · ' + contactLine(profile) + '</p>';
+  }
+  footer.innerHTML = html + '<p>&copy; ' + new Date().getFullYear() + ' ' + esc(profile.name) + '</p>';
 }
 
 /* ------------------------------------------------------------- pages */
 
 function renderAbout(profile) {
-  var html = '';
-  if (profile.phdNotice) {
-    html += '<blockquote><p><strong>' + esc(profile.phdNotice) + '</strong></p></blockquote>';
-  }
+  var text = '<h1 class="site-name">' + esc(profile.name) + '</h1>';
+  text += '<p class="site-role">' + esc(profile.title) + '</p>';
+  text += '<p class="site-role">' + contactLine(profile) + '</p>';
+  text += '<p class="site-links slashed">' + profileLinks(profile) + '</p>';
+
+  if (profile.phdNotice) text += '<p class="notice">' + esc(profile.phdNotice) + '</p>';
+  text += '<p>' + profile.bio + '</p>';
   if (profile.researchInterests && profile.researchInterests.length) {
-    html += '<h3>Major Research Interests</h3><ul>';
-    profile.researchInterests.forEach(function (i) { html += '<li>' + esc(i) + '</li>'; });
-    html += '</ul>';
+    text += '<p><strong>Major Research Interests:</strong> ' + profile.researchInterests.map(esc).join(', ') + '</p>';
   }
-  html += '<p>' + profile.bio + '</p>';
   if (profile.facultySites && profile.facultySites.length) {
-    html += '<p>Working as a <strong>Lecturer at BRAC University, CSE Department.</strong> ';
-    html += profile.facultySites.map(function (s) {
-      return '<a href="' + s.url + '" target="_blank" rel="noopener">(' + esc(s.label) + ')</a>';
+    text += '<p>Working as a <strong>Lecturer at BRAC University, CSE Department.</strong> ';
+    text += profile.facultySites.map(function (s) {
+      return '<span class="nowrap">' + extLink(s.url, '(' + esc(s.label) + ')') + '</span>';
     }).join(' ');
-    html += '</p>';
+    text += '</p>';
   }
-  html += '<p>All my publications can be seen <a href="research.html">here</a>.</p>';
-  document.getElementById('about-content').innerHTML = html;
+  text += '<p>All my publications can be seen <a href="research.html">here</a>.</p>';
+
+  var photo = '';
+  if (profile.image) {
+    var webp = profile.image.replace(/\.(jpe?g|png)$/i, '.webp');
+    var alt = esc(profile.imagecaption || profile.name);
+    photo = '<figure class="portrait"><picture>' +
+      '<source srcset="' + webp + '" type="image/webp">' +
+      '<img src="' + profile.image + '" alt="' + alt +
+      '" width="400" height="403" loading="eager" decoding="async" fetchpriority="high">' +
+      '</picture>';
+    if (profile.imagecaption) photo += '<figcaption>' + esc(profile.imagecaption) + '</figcaption>';
+    photo += '</figure>';
+  }
+
+  document.getElementById('about-content').innerHTML =
+    '<div class="about"><div class="about-text">' + text + '</div>' + photo + '</div>' +
+    '<h2 class="section-title">Recent News</h2><div id="recent-news"></div>' +
+    '<p class="more"><a href="news.html">All news</a></p>';
 }
 
-function renderNews(news) {
+var RECENT_NEWS = 4; // items shown on the home page
+
+function renderNews(news, targetId, limit) {
   var months = {
     January: 0, February: 1, March: 2, April: 3, May: 4, June: 5, July: 6,
     August: 7, September: 8, October: 9, November: 10, December: 11
@@ -241,32 +200,24 @@ function renderNews(news) {
     return new Date(+pb[1], months[pb[0]]) - new Date(+pa[1], months[pa[0]]);
   });
 
-  var html = '<div class="news-list">';
-  news.forEach(function (item) {
-    html += '<div class="news-item">';
-    html += '<div class="news-date"><span class="badge">' + esc(item.date) + '</span></div>';
-    html += '<div class="news-body">';
-    if (item.link) {
-      html += '<a href="' + item.link + '" target="_blank" rel="noopener"><strong>' + esc(item.title) + '</strong></a> — ';
-    } else {
-      html += '<strong>' + esc(item.title) + '</strong> — ';
-    }
-    html += item.description + '</div></div>';
+  var html = '<ul class="rows">';
+  news.slice(0, limit).forEach(function (item) {
+    var title = item.link ? extLink(item.link, esc(item.title)) : esc(item.title);
+    html += row(item.date, '<p class="entry-text"><strong>' + title + '</strong> — ' + item.description + '</p>');
   });
-  html += '</div>';
-  document.getElementById('news-content').innerHTML = html;
+  html += '</ul>';
+  document.getElementById(targetId).innerHTML = html;
 }
 
 function renderEducation(education) {
-  var html = '';
+  var html = '<ul class="rows">';
   education.forEach(function (edu) {
-    html += '<div class="edu-entry">';
-    html += '<div class="edu-head"><h3 class="edu-degree">' + esc(edu.degree) + '</h3>' +
-      '<span class="badge outline">' + esc(edu.year) + '</span></div>';
-    html += '<div class="edu-inst">' + esc(edu.institution) + ', ' + esc(edu.location) + '</div>';
-    if (edu.details) html += '<div class="edu-detail"><span class="badge">' + esc(edu.details) + '</span></div>';
-    html += '</div>';
+    var body = '<h2 class="entry-title">' + esc(edu.degree) + '</h2>';
+    body += '<p class="entry-sub">' + esc(edu.institution) + ', ' + esc(edu.location) + '</p>';
+    if (edu.details) body += '<p class="entry-sub">' + esc(edu.details) + '</p>';
+    html += row(edu.year, body);
   });
+  html += '</ul>';
   document.getElementById('education-content').innerHTML = html;
 }
 
@@ -283,7 +234,7 @@ function renderResearch(research, me) {
   sections.forEach(function (sec) {
     var papers = research[sec.key];
     if (!papers || !papers.length) return;
-    html += '<h2 class="section-title">' + sec.label + '</h2><ol class="pub-list">';
+    html += '<h2 class="section-title">' + sec.label + '</h2><ol class="rows pubs">';
     papers.forEach(function (p, i) { html += paperItem(p, sec.key + '_' + i, me); });
     html += '</ol>';
   });
@@ -298,93 +249,76 @@ function renderResearch(research, me) {
 }
 
 function paperItem(p, id, me) {
-  var html = '<li class="pub-item">';
-  html += '<div class="pub-abbr"><span class="badge">' + esc(getVenueAbbr(p)) + '</span></div>';
-  html += '<div class="pub-main" id="' + id + '">';
-  html += '<div class="pub-title">' + (p.Link
-    ? '<a href="' + p.Link + '" target="_blank" rel="noopener">' + esc(p.title) + '</a>'
-    : esc(p.title)) + '</div>';
-  html += '<div class="pub-authors">' + highlightAuthor(p.authors, me) + '</div>';
+  var body = '<div class="entry-title">' + (p.Link ? extLink(p.Link, esc(p.title)) : esc(p.title)) + '</div>';
+  body += '<p class="entry-sub">' + highlightAuthor(p.authors, me) + '</p>';
   if (p.venue) {
-    html += '<div class="pub-venue">' + esc(p.venue) + '</div>';
+    body += '<p class="entry-sub venue">' + esc(p.venue) + '</p>';
   } else if (p.status) {
-    html += '<div class="pub-venue">' + esc(p.status) + '</div>';
+    body += '<p class="entry-sub venue">' + esc(p.status) + '</p>';
   }
-  html += '<div class="pub-links">';
-  if (p.description) html += '<a class="btn abstract-toggle" role="button">Abstract</a>';
-  if (p.codeLink) html += '<a class="btn" href="' + p.codeLink + '" target="_blank" rel="noopener">Code</a>';
-  if (p.pdfLink) html += '<a class="btn" href="' + p.pdfLink + '" target="_blank" rel="noopener">PDF</a>';
-  if (p.preprintLink) html += '<a class="btn" href="' + p.preprintLink + '" target="_blank" rel="noopener">Preprint</a>';
-  html += '</div>';
-  if (p.description) html += '<div class="abstract hidden"><p>' + esc(p.description) + '</p></div>';
-  html += '</div></li>';
-  return html;
+  body += '<div class="entry-links slashed">';
+  if (p.description) body += abstractToggle('Abstract');
+  if (p.codeLink) body += extLink(p.codeLink, 'Code');
+  if (p.pdfLink) body += extLink(p.pdfLink, 'PDF');
+  if (p.preprintLink) body += extLink(p.preprintLink, 'Preprint');
+  body += '</div>';
+  if (p.description) body += abstractPanel(p.description);
+  return row(getVenueAbbr(p), body, id);
 }
 
 function renderWork(work) {
-  var html = '';
+  var html = '<ul class="rows">';
   work.forEach(function (job) {
-    html += '<div class="work-entry">';
-    html += '<div class="work-head"><h3 class="work-title">' + esc(job.title) + '</h3>' +
-      '<span class="badge outline">' + esc(job.duration) + '</span></div>';
-    html += '<div class="work-company">';
-    html += job.companyLink
-      ? '<a href="' + job.companyLink + '" target="_blank" rel="noopener">' + esc(job.company) + '</a>'
-      : '<strong>' + esc(job.company) + '</strong>';
-    if (job.department) html += ', ' + esc(job.department);
-    html += '</div>';
+    var body = '<h2 class="entry-title">' + esc(job.title) + '</h2>';
+    body += '<p class="entry-sub">' + (job.companyLink ? extLink(job.companyLink, esc(job.company)) : esc(job.company));
+    if (job.department) body += ', ' + esc(job.department);
+    body += '</p>';
 
     if (job.courses && job.courses.length) {
-      html += '<div class="work-subhead">Courses Taught</div>';
+      body += '<div class="entry-subhead">Courses Taught</div><ul class="plain courses">';
       job.courses.forEach(function (c) {
-        html += '<div class="course-item"><div class="course-name"><strong>' + esc(c.code) + ': ' +
-          esc(c.name) + '</strong> <span class="tag tag-muted">' + esc(c.type) + '</span></div>';
-        html += '<div class="tag-row">' + c.semesters.map(function (s) {
-          return '<span class="tag">' + esc(s) + '</span>';
-        }).join('') + '</div></div>';
+        body += '<li>' + esc(c.code) + ': ' + esc(c.name) + ' · ' + esc(c.type) +
+          '<p class="entry-sub">' + c.semesters.map(esc).join(', ') + '</p></li>';
       });
+      body += '</ul>';
     }
     if (job.responsibilities && job.responsibilities.length) {
-      html += '<div class="work-subhead">Responsibilities</div><ul>';
-      job.responsibilities.forEach(function (r) { html += '<li>' + esc(r) + '</li>'; });
-      html += '</ul>';
+      body += '<div class="entry-subhead">Responsibilities</div><ul class="entry-list">';
+      job.responsibilities.forEach(function (r) { body += '<li>' + esc(r) + '</li>'; });
+      body += '</ul>';
     }
     if (!(job.courses && job.courses.length) && job.description) {
-      html += '<p>' + job.description + '</p>';
+      body += '<p class="entry-text">' + job.description + '</p>';
     }
-    html += '</div>';
+    html += row(job.duration, body);
   });
+  html += '</ul>';
   document.getElementById('work-content').innerHTML = html;
 }
 
 function renderProjects(projects) {
-  var html = '<ul class="project-list">';
-  projects.forEach(function (pr, i) {
-    html += '<li><span class="proj-title">' + esc(pr.name) + '</span>';
-    if (pr.technologies && pr.technologies.length) {
-      html += ' <span class="proj-tech">(' + pr.technologies.map(esc).join(', ') + ')</span>';
-    }
-    html += '<div class="pub-links">';
-    if (pr.description) html += '<a class="btn abstract-toggle" role="button">Summary</a>';
-    if (pr.githubLink) html += '<a class="btn" href="' + pr.githubLink + '" target="_blank" rel="noopener">GitHub</a>';
-    html += '</div>';
-    if (pr.description) html += '<div class="abstract hidden"><p>' + esc(pr.description) + '</p></div>';
-    html += '</li>';
+  var html = '<ul class="rows">';
+  projects.forEach(function (pr) {
+    var body = '<div class="entry-title">' + esc(pr.name) + '</div><div class="entry-links slashed">';
+    if (pr.description) body += abstractToggle('Summary');
+    if (pr.githubLink) body += extLink(pr.githubLink, 'GitHub');
+    body += '</div>';
+    if (pr.description) body += abstractPanel(pr.description);
+    html += row((pr.technologies || []).join(', '), body);
   });
   html += '</ul>';
   document.getElementById('projects-content').innerHTML = html;
 }
 
 function renderTalks(talks) {
-  var html = '<ul class="talk-list">';
+  var html = '<ul class="rows">';
   talks.forEach(function (t) {
-    html += '<li><strong>' + esc(t.title) + '</strong>';
-    if (t.venue) html += ' — ' + esc(t.venue);
-    html += '<div class="pub-links">';
-    if (t.videoLink) html += '<a class="btn" href="' + t.videoLink + '" target="_blank" rel="noopener">Video</a>';
-    if (t.slidesLink) html += '<a class="btn" href="' + t.slidesLink + '" target="_blank" rel="noopener">Slides</a>';
-    if (t.preprintLink) html += '<a class="btn" href="' + t.preprintLink + '" target="_blank" rel="noopener">Paper</a>';
-    html += '</div></li>';
+    var body = '<div class="entry-title">' + esc(t.title) + '</div><div class="entry-links slashed">';
+    if (t.videoLink) body += extLink(t.videoLink, 'Video');
+    if (t.slidesLink) body += extLink(t.slidesLink, 'Slides');
+    if (t.preprintLink) body += extLink(t.preprintLink, 'Paper');
+    body += '</div>';
+    html += row(t.venue || '', body);
   });
   html += '</ul>';
   document.getElementById('talks-content').innerHTML = html;
@@ -402,44 +336,38 @@ function renderServices(services) {
     return;
   }
 
-  var html = '';
+  var rows = '';
   keys.forEach(function (category) {
     var entries = services[category];
     if (!Array.isArray(entries) || !entries.length) return;
 
     var label = category.replace(/([A-Z])/g, ' $1').replace(/^./, function (c) { return c.toUpperCase(); });
-    html += '<h2 class="section-title">' + esc(label) + '</h2><ul class="award-list">';
-    entries.forEach(function (item) {
+    rows += row(label, entries.map(function (item) {
       var role = item.role ? esc(item.role) : '';
-      var line = role;
-      if (item.link) line = '<a href="' + item.link + '" target="_blank" rel="noopener">' + line + '</a>';
-      html += '<li>' + line + '</li>';
-    });
-    html += '</ul>';
+      return '<div>' + (item.link ? extLink(item.link, role) : role) + '</div>';
+    }).join(''));
   });
 
-  document.getElementById('services-content').innerHTML = html || '<p>No services listed yet.</p>';
+  document.getElementById('services-content').innerHTML =
+    rows ? '<ul class="rows">' + rows + '</ul>' : '<p>No services listed yet.</p>';
 }
 
 function renderSkills(skills) {
-  var html = '';
+  var html = '<ul class="rows">';
   if (skills.technicalSkills) {
     Object.keys(skills.technicalSkills).forEach(function (cat) {
-      html += '<div class="skill-group"><h3>' + esc(cat) + '</h3><div class="tag-row">';
-      skills.technicalSkills[cat].forEach(function (s) { html += '<span class="tag">' + esc(s) + '</span>'; });
-      html += '</div></div>';
+      html += row(cat, skills.technicalSkills[cat].map(esc).join(', '));
     });
   }
   if (skills.spokenLanguages) {
-    html += '<div class="skill-group"><h3>Spoken Languages</h3><div class="tag-row">';
-    skills.spokenLanguages.forEach(function (l) { html += '<span class="tag">' + esc(l) + '</span>'; });
-    html += '</div></div>';
+    html += row('Spoken Languages', skills.spokenLanguages.map(esc).join(', '));
   }
+  html += '</ul>';
   document.getElementById('skills-content').innerHTML = html;
 }
 
 function renderAwards(achievements) {
-  var html = '<ul class="award-list">';
+  var html = '<ul class="plain">';
   achievements.forEach(function (a) { html += '<li>' + esc(a) + '</li>'; });
   html += '</ul>';
   document.getElementById('awards-content').innerHTML = html;
@@ -448,12 +376,11 @@ function renderAwards(achievements) {
 /* ------------------------------------------------------------- abstract toggle */
 
 function initAbstractToggles() {
-  document.querySelectorAll('a.abstract-toggle').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      var item = link.closest('.pub-main, li');
-      var panel = item && item.querySelector('.abstract');
-      if (panel) panel.classList.toggle('open');
+  document.querySelectorAll('.abstract-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = btn.closest('li').querySelector('.abstract');
+      panel.hidden = !panel.hidden;
+      btn.setAttribute('aria-expanded', String(!panel.hidden));
     });
   });
 }

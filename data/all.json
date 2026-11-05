@@ -69,7 +69,7 @@
       },
       {
         "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
-        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Rifat Shahriyar, Gias Uddin",
+        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Gias Uddin, Rifat Shahriyar",
         "venue": "ACM International Conference on the Foundations of Software Engineering (FSE 2026), Tool Demo Track",
         "Link": "https://dl.acm.org/doi/10.1145/3803437.3806406",
         "preprintLink": "https://arxiv.org/pdf/2602.08072v3",
@@ -80,7 +80,7 @@
       },
       {
         "title": "Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation",
-        "authors": "Sadif Ahmed, Md Nafiu Rahman, Zahin Wahab, Rifat Shahriyar, Gias Uddin",
+        "authors": "Sadif Ahmed, Md Nafiu Rahman, Zahin Wahab, Gias Uddin, Rifat Shahriyar",
         "venue": "IEEE/ACM International Conference on Mining Software Repositories (MSR 2026), Technical Track",
         "Link": "https://dl.acm.org/doi/10.1145/3793302.3793348",
         "preprintLink": "https://arxiv.org/abs/2410.23657",
@@ -91,7 +91,7 @@
       },
       {
         "title": "Secret Breach Detection in Source Code with Large Language Models",
-        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, Rifat Shahriyar, S. M. Sohan",
+        "authors": "Md Nafiu Rahman, Sadif Ahmed, Zahin Wahab, S. M. Sohan, Rifat Shahriyar",
         "venue": "ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM 2025), Technical Track",
         "Link": "https://ieeexplore.ieee.org/abstract/document/11323433",
         "preprintLink": "https://arxiv.org/abs/2504.18784",
@@ -111,6 +111,18 @@
         "preprintLink": "https://arxiv.org/abs/2512.19122",
         "description": "We introduce BanglaForge, a new framework designed to generate executable code from Bangla language descriptions, addressing the challenges of a low-resource setting. Our approach employs a retrieval-augmented dual-model collaboration paradigm with iterative self-refinement guided by execution feedback. By integrating LLM-based translation and in-context learning, the system achieves a strong Pass@1 accuracy of 84.00% on the BLP-2025 Bangla Code Generation benchmark, demonstrating the effectiveness of our method for low-resource code generation.",
         "year": "2025",
+        "status": "Accepted"
+      }
+    ],
+    "journalPapers": [
+      {
+        "title": "A Survey on Agentic Security: Applications, Threats and Defenses",
+        "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
+        "venue": "Transactions on Machine Learning Research (TMLR 2026)",
+        "Link": "https://openreview.net/forum?id=Od4ZnAUv9T",
+        "preprintLink": "https://arxiv.org/abs/2510.06445",
+        "description": "In this work we present the first holistic survey of the agentic security landscape, structuring the field around three fundamental pillars: Applications, Threats, and Defenses. We provide a comprehensive taxonomy of over 160 papers, explaining how agents are used in downstream cybersecurity applications, inherent threats to agentic systems, and countermeasures designed to protect them. A detailed cross-cutting analysis shows emerging trends in agent architecture while revealing critical research gaps in model and modality coverage. A complete and continuously updated list of all surveyed papers is publicly available at https://github.com/kagnlp/Awesome-Agentic-Security",
+        "year": "2026",
         "status": "Accepted"
       }
     ],
@@ -140,15 +152,6 @@
         "preprintLink": "https://arxiv.org/abs/2607.02772",
         "description": "Since 2020, the Linux Foundation and the multi-organization Inclusive Naming Initiative (INI) have encouraged open-source projects to replace non-inclusive terms such as master/slave and whitelist/blacklist. We present NISCAN, a multilingual static-analysis framework that detects non-inclusive terminology across source code and related software artifacts using the INI vocabulary. Using NISCAN, we conduct the first ecosystem-scale study of inclusive naming across 461 Linux Foundation repositories and show substantial progress since 2020 with lingering terminology residue across documentation, comments, configuration files, and other artifacts. We also show that historical naming decisions remain embedded in large language model predictions even after identifiers have been renamed.",
         "year": "2026",
-        "status": "Under Review"
-      },
-      {
-        "title": "A Survey on Agentic Security: Applications, Threats and Defenses",
-        "authors": "Asif Shahriar, Md Nafiu Rahman, Sadif Ahmed, Farig Sadeque, Md Rizwan Parvez",
-        "Link": "https://arxiv.org/abs/2510.06445",
-        "preprintLink": "https://arxiv.org/abs/2510.06445",
-        "description": "In this work we present the first holistic survey of the agentic security landscape, structuring the field around three fundamental pillars: Applications, Threats, and Defenses. We provide a comprehensive taxonomy of over 160 papers, explaining how agents are used in downstream cybersecurity applications, inherent threats to agentic systems, and countermeasures designed to protect them. A detailed cross-cutting analysis shows emerging trends in agent architecture while revealing critical research gaps in model and modality coverage. A complete and continuously updated list of all surveyed papers is publicly available at https://github.com/kagnlp/Awesome-Agentic-Security",
-        "year": "2025",
         "status": "Under Review"
       },
       {

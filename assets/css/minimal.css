@@ -524,6 +524,7 @@ ol.bibliography > li + li .pub { border-top: 1px solid var(--line-soft); }
 }
 
 @media (max-width: 600px) {
-  .pub, .row { grid-template-columns: 1fr; gap: 2px; }
+  .pub, .row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .bibtex pre { white-space: pre-wrap; overflow-wrap: anywhere; padding-top: 34px; }
   .page-title { font-size: 28px; }
 }

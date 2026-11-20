@@ -1,0 +1,139 @@
+[
+  {
+    "repo": "betterleaks/betterleaks",
+    "url": "https://github.com/betterleaks/betterleaks",
+    "description": "Find leaked secrets everywhere.",
+    "contributions": [
+      {
+        "text": "Added detection rules for Anthropic OAuth access and refresh tokens (from Claude subscription logins), which no existing rule matched",
+        "pr": 480,
+        "url": "https://github.com/betterleaks/betterleaks/pull/480",
+        "status": "merged"
+      },
+      {
+        "text": "Removed the stopword list from the generic API key rule, which dropped random keys that happened to contain a common word; on 200 random keys with an embedded word, detections rose from 33 to 126",
+        "pr": 483,
+        "url": "https://github.com/betterleaks/betterleaks/pull/483",
+        "issue": 481,
+        "issueUrl": "https://github.com/betterleaks/betterleaks/issues/481",
+        "status": "merged"
+      }
+    ]
+  },
+  {
+    "repo": "coveragepy/coveragepy",
+    "url": "https://github.com/coveragepy/coveragepy",
+    "description": "The code coverage tool for Python.",
+    "contributions": [
+      {
+        "text": "Fixed a crash on Python 3.14 with the pytrace core and branch coverage, where the return after an except* handler recorded a None line and broke saving and reporting",
+        "pr": 2403,
+        "url": "https://github.com/coveragepy/coveragepy/pull/2403",
+        "status": "merged"
+      }
+    ]
+  },
+  {
+    "repo": "PyCQA/flake8-bugbear",
+    "url": "https://github.com/PyCQA/flake8-bugbear",
+    "description": "A Flake8 plugin for finding likely bugs and design problems in Python programs.",
+    "contributions": [
+      {
+        "text": "Fixed B040 false positives when a caught exception with an added note is logged through logger.exception(), exc_info=True or the traceback helpers",
+        "pr": 632,
+        "url": "https://github.com/PyCQA/flake8-bugbear/pull/632",
+        "status": "merged"
+      },
+      {
+        "text": "Follow-up from review: fut.exception() and exc_info=False are no longer treated as handling the exception",
+        "pr": 637,
+        "url": "https://github.com/PyCQA/flake8-bugbear/pull/637",
+        "status": "merged"
+      }
+    ]
+  },
+  {
+    "repo": "boxed/mutmut",
+    "url": "https://github.com/boxed/mutmut",
+    "description": "A mutation testing system for Python.",
+    "contributions": [
+      {
+        "text": "Re-run cached mutants when test files are edited, added or deleted, by storing a hash of each test file, so weakening a test no longer leaves its mutants reported as killed",
+        "pr": 635,
+        "url": "https://github.com/boxed/mutmut/pull/635",
+        "status": "open"
+      },
+      {
+        "text": "Remove deleted test files from the mutants/ copy so stale tests stop killing mutants",
+        "pr": 636,
+        "url": "https://github.com/boxed/mutmut/pull/636",
+        "status": "open"
+      }
+    ]
+  },
+  {
+    "repo": "pylint-dev/astroid",
+    "url": "https://github.com/pylint-dev/astroid",
+    "description": "The Python source code representation behind pylint.",
+    "contributions": [
+      {
+        "text": "Stopped call-site inference from unpacking an empty list literal that is later filled by append or extend, which caused no-value-for-parameter false positives in pylint",
+        "pr": 3478,
+        "url": "https://github.com/pylint-dev/astroid/pull/3478",
+        "status": "open"
+      }
+    ]
+  },
+  {
+    "repo": "catchorg/Catch2",
+    "url": "https://github.com/catchorg/Catch2",
+    "description": "A modern, C++-native test framework for unit tests, TDD and BDD.",
+    "contributions": [
+      {
+        "text": "Fixed test discovery under Emscripten by reading the test listing from stdout, so builds and ctest runs no longer fail",
+        "pr": 3242,
+        "url": "https://github.com/catchorg/Catch2/pull/3242",
+        "status": "open"
+      }
+    ]
+  },
+  {
+    "repo": "huggingface/datasets",
+    "url": "https://github.com/huggingface/datasets",
+    "description": "The largest hub of ready-to-use datasets for AI models, with efficient data manipulation tools.",
+    "contributions": [
+      {
+        "text": "Fixed to_json silently writing wrong values for fixed-shape Array2D to Array5D columns",
+        "pr": 9081,
+        "url": "https://github.com/huggingface/datasets/pull/9081",
+        "status": "open"
+      }
+    ]
+  },
+  {
+    "repo": "browser-use/browser-use",
+    "url": "https://github.com/browser-use/browser-use",
+    "description": "An open-source Python library for AI browser agents.",
+    "contributions": [
+      {
+        "text": "Priced OpenRouter requests from the cost OpenRouter reports, instead of leaving it empty for unlisted models, and added a per-request cost breakdown",
+        "pr": 6393,
+        "url": "https://github.com/browser-use/browser-use/pull/6393",
+        "status": "open"
+      }
+    ]
+  },
+  {
+    "repo": "iitzco/deepbrain",
+    "url": "https://github.com/iitzco/deepbrain",
+    "description": "Deep learning tools for brain medical images.",
+    "contributions": [
+      {
+        "text": "Made the brain extractor work with TensorFlow 2.x",
+        "pr": 21,
+        "url": "https://github.com/iitzco/deepbrain/pull/21",
+        "status": "open"
+      }
+    ]
+  }
+]

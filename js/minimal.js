@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (document.getElementById('education-content')) document.getElementById('education-content').innerHTML = educationTimeline(data.education);
       if (document.getElementById('research-content')) renderResearch(data.research, data.profile.name);
       if (document.getElementById('work-content')) document.getElementById('work-content').innerHTML = workTimeline(data.work, true);
-      if (document.getElementById('projects-content')) renderProjects(data.projects);
+      if (document.getElementById('projects-content')) renderProjects(data.projects, data.opensource);
       if (document.getElementById('talks-content')) renderTalks(data.talks);
       if (document.getElementById('services-content')) renderServices(data.services);
       if (document.getElementById('skills-content')) renderSkills(data.skills);
@@ -229,17 +229,12 @@ function selectedPubs(research, me) {
       if (k !== 'workshopPapers' && venues.indexOf(v) < 0) venues.push(v);
     });
   });
-  var review = research.manuscriptsUnderReview || [];
-
   var html = '<div class="pubsum"><div class="note-title">Highlights</div><div class="pubsum-stats">' +
-    '<span><b>' + peer.length + '</b> peer-reviewed papers</span>' +
-    '<span><b>' + review.length + '</b> under review</span></div>' +
+    '<span><b>' + peer.length + '</b> peer-reviewed papers</span></div>' +
     '<p class="pubsum-note">Published at ' + venuesSentence(venues) +
     '. Full list on the <a href="research.html">publications page</a>.</p></div>';
 
-  html += pubGroup('Peer-reviewed', peer, 'peer', me);
-  if (review.length) html += pubGroup('Under review', review, 'review', me);
-  return html;
+  return html + pubGroup('Peer-reviewed', peer, 'peer', me);
 }
 
 function venuesSentence(v) {
@@ -258,13 +253,17 @@ function paperItem(p, id, me) {
   body += '<div class="pub-authors">' + highlightAuthor(p.authors, me) + '</div>';
   if (p.venue) body += '<div class="pub-venue">' + esc(p.venue) + '</div>';
   body += '<div class="pub-links">';
-  if (p.Link) body += extLink(p.Link, 'paper');
+  if (p.Link) body += extLink(p.Link, /arxiv\.org/.test(p.Link) ? 'arXiv' : 'paper');
   if (p.pdfLink) body += extLink(p.pdfLink, 'pdf');
-  if (p.preprintLink) body += extLink(p.preprintLink, 'arXiv');
+  if (p.preprintLink && p.preprintLink !== p.Link) body += extLink(p.preprintLink, 'arXiv');
   if (p.codeLink) body += extLink(p.codeLink, 'code');
-  if (p.description) body += '<button class="link-btn" type="button" data-abstract="' + id + '" aria-expanded="false">abstract</button>';
+  if (p.bibtex) body += '<button class="link-btn" type="button" data-abstract="' + id + '" aria-expanded="false">bibtex</button>';
   body += '</div>';
-  if (p.description) body += '<div class="abstract" id="' + id + '" hidden><p>' + esc(p.description) + '</p></div>';
+  if (p.bibtex) {
+    body += '<div class="bibtex" id="' + id + '" hidden>' +
+      '<button class="copy-btn" type="button" data-copy="' + id + '">copy</button>' +
+      '<pre>' + esc(p.bibtex) + '</pre></div>';
+  }
   return '<li><div class="pub"><div class="pub-abbr">' + esc(getVenueAbbr(p)) + '</div><div>' + body + '</div></div></li>';
 }
 
@@ -336,18 +335,46 @@ function row(label, body) {
   return '<li class="row"><div class="row-label">' + esc(label) + '</div><div class="row-body">' + body + '</div></li>';
 }
 
-function renderProjects(projects) {
-  var html = '<ul class="rows">';
-  projects.forEach(function (pr, i) {
-    var id = 'proj_' + i;
-    var body = '<div class="row-title">' + esc(pr.name) + '</div><div class="pub-links">';
-    if (pr.githubLink) body += extLink(pr.githubLink, 'code');
-    if (pr.description) body += '<button class="link-btn" type="button" data-abstract="' + id + '" aria-expanded="false">summary</button>';
-    body += '</div>';
-    if (pr.description) body += '<div class="abstract" id="' + id + '" hidden><p>' + esc(pr.description) + '</p></div>';
-    html += row((pr.technologies || []).join(', '), body);
-  });
-  document.getElementById('projects-content').innerHTML = html + '</ul>';
+/* Projects page: personal projects, then open source contributions. */
+function renderProjects(projects, opensource) {
+  var html = '';
+
+  if (projects && projects.length) {
+    html += '<h2 class="page-section-title">Personal Projects</h2>';
+    projects.forEach(function (pr) {
+      html += '<div class="proj"><h3 class="proj-name">' +
+        (pr.githubLink ? extLink(pr.githubLink, esc(pr.name)) : esc(pr.name)) + '</h3>';
+      var meta = [];
+      if (pr.technologies && pr.technologies.length) meta.push('<strong>' + pr.technologies.map(esc).join(', ') + '</strong>');
+      if (pr.githubLink) meta.push(extLink(pr.githubLink, 'GitHub'));
+      if (meta.length) html += '<p class="proj-meta">' + meta.join(' <span class="sep">·</span> ') + '</p>';
+      if (pr.description) html += '<p class="proj-desc">' + esc(pr.description) + '</p>';
+      html += '</div>';
+    });
+  }
+
+  /* Only merged PRs are shown; open ones stay in data/opensource.json until merged. */
+  var shown = (opensource || []).map(function (o) {
+    return { o: o, prs: o.contributions.filter(function (c) { return c.status === 'merged'; }) };
+  }).filter(function (x) { return x.prs.length; });
+
+  if (shown.length) {
+    html += '<h2 class="page-section-title">Open Source Contributions</h2>';
+    shown.forEach(function (x) {
+      html += '<div class="proj"><h3 class="proj-name">' + extLink(x.o.url, esc(x.o.repo)) + '</h3>';
+      if (x.o.description) html += '<p class="proj-desc">' + esc(x.o.description) + '</p>';
+      html += '<ul class="proj-list">';
+      x.prs.forEach(function (c) {
+        var refs = c.issue
+          ? 'reported in ' + extLink(c.issueUrl, 'issue #' + c.issue) + ', fixed in ' + extLink(c.url, 'PR #' + c.pr)
+          : extLink(c.url, 'PR #' + c.pr);
+        html += '<li>' + esc(c.text) + ' (' + refs + ')</li>';
+      });
+      html += '</ul></div>';
+    });
+  }
+
+  document.getElementById('projects-content').innerHTML = html;
 }
 
 function renderTalks(talks) {
@@ -403,6 +430,16 @@ function initToggles() {
       var panel = document.getElementById(btn.getAttribute('data-abstract'));
       panel.hidden = !panel.hidden;
       btn.setAttribute('aria-expanded', String(!panel.hidden));
+    });
+  });
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = document.getElementById(btn.getAttribute('data-copy')).querySelector('pre').textContent;
+      var done = function () {
+        btn.textContent = 'copied';
+        setTimeout(function () { btn.textContent = 'copy'; }, 1500);
+      };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () { });
     });
   });
   document.querySelectorAll('[data-news-toggle]').forEach(function (btn) {

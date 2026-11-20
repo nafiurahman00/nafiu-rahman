@@ -65,7 +65,8 @@
         "codeLink": "https://github.com/s2e-lab/Calibrating-Secure-Code-Generation",
         "description": "Large Language Models (LLMs) are rapidly transforming software development, yet their use in security-critical contexts raises a key question: do models know when their generated code is insecure? This property, known as calibration, measures whether a model’s confidence aligns with the true correctness of its outputs. We present the first large-scale empirical study of security calibration in LLM-generated code. Our evaluation analyzes thousands of generations across two complementary benchmarks: self-contained security tasks and multi-language repository-level contexts. We evaluate GPT-4o-mini, Gemini-2.0-Flash, and Qwen3-Coder-Next across multiple temperature settings. Our results show that all models are systematically overconfident. Functional calibration is consistently worse than security calibration, suggesting that execution brittleness amplifies uncertainty more than vulnerability pattern recognition. Calibration-guided repair yields limited improvements and often introduces functional regressions, revealing a rigidity barrier that prevents security-critical transformations. Finally, while architectural gating can reduce miscalibration in controlled settings, calibration degrades substantially in realistic repository-level contexts, increasing the risk of False Trust in vulnerable code.",
         "year": "2026",
-        "status": "Accepted"
+        "status": "Accepted",
+        "bibtex": "@inproceedings{siddiq2026calibration,\n  title     = {An Empirical Study of Security Calibration in Large Language Models for Code},\n  author    = {Siddiq, Mohammed Latif and Rahman, Md Nafiu and Santos, Joanna C. S.},\n  booktitle = {Proceedings of the IEEE International Conference on Software Maintenance and Evolution (ICSME)},\n  year      = {2026},\n  note      = {To appear},\n  eprint    = {2606.31159},\n  archivePrefix = {arXiv},\n  url       = {https://arxiv.org/abs/2606.31159}\n}"
       },
       {
         "title": "IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports",
@@ -76,7 +77,8 @@
         "codeLink": "https://github.com/disa-lab/IssueGuard",
         "description": "GitHub and GitLab are widely used collaborative platforms whose issue-tracking systems contain large volumes of unstructured text, including logs, code snippets, and configuration examples. This creates a significant risk of accidental secret exposure, such as API keys and credentials, yet these platforms provide no mechanism to warn users before submission. We present IssueGuard, a tool for real-time detection and prevention of secret leaks in issue reports. Implemented as a Chrome extension, IssueGuard analyzes text as users type and combines regex-based candidate extraction with a fine-tuned CodeBERT model for contextual classification. This approach effectively separates real secrets from false positives and achieves an F1-score of 92.70% on a benchmark dataset, outperforming traditional regex-based scanners. IssueGuard integrates directly into the web interface and continuously analyzes the issue editor, presenting clear visual warnings to help users avoid submitting sensitive data. The source code is publicly available at https://github.com/disa-lab/IssueGuard , and a demonstration video is available at https://youtu.be/kvbWA8rr9cU.",
         "year": "2026",
-        "status": "Accepted"
+        "status": "Accepted",
+        "bibtex": "@inproceedings{rahman2026issueguard,\n  title     = {IssueGuard: Real-Time Secret Leak Prevention Tool for GitHub Issue Reports},\n  author    = {Rahman, Md Nafiu and Ahmed, Sadif and Wahab, Zahin and Uddin, Gias and Shahriyar, Rifat},\n  booktitle = {Proceedings of the 34th ACM International Conference on the Foundations of Software Engineering},\n  series    = {FSE Companion '26},\n  publisher = {ACM},\n  year      = {2026},\n  month     = jul,\n  pages     = {132--136},\n  doi       = {10.1145/3803437.3806406}\n}"
       },
       {
         "title": "Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation",
@@ -87,7 +89,8 @@
         "codeLink": "https://github.com/nafiurahman00/Secret-Breach-Prevention-In-Software-Issue-Reports",
         "description": "In the digital era, accidental exposure of sensitive information such as API keys, tokens, and credentials is a growing security threat. While most prior work focuses on detecting secrets in source code, leakage in software issue reports remains largely unexplored. This study fills that gap through a large-scale analysis and a practical detection pipeline for exposed secrets in GitHub issues. Our pipeline combines regular expression-based extraction with large language model (LLM) based contextual classification to detect real secrets and reduce false positives. We build a benchmark of 54,148 instances from public GitHub issues, including 5,881 manually verified true secrets. Using this dataset, we evaluate entropy-based baselines and keyword heuristics used by prior secret detection tools, classical machine learning, deep learning, and LLM-based methods. Regex and entropy based approaches achieve high recall but poor precision, while smaller models such as RoBERTa and CodeBERT greatly improve performance (F1 = 92.70%). Proprietary models like GPT-4o perform moderately in few-shot settings (F1 = 80.13%), and fine-tuned open-source larger LLMs such as Qwen and LLaMA reach up to 94.49% F1. Finally, we also validate our approach on 178 real-world GitHub repositories, achieving an F1-score of 81.6% which demonstrates our approach’s strong ability to generalize to in-the-wild scenarios.",
         "year": "2026",
-        "status": "Accepted"
+        "status": "Accepted",
+        "bibtex": "@inproceedings{ahmed2026secretleak,\n  title     = {Secret Leak Detection in Software Issue Reports using LLMs: A Comprehensive Evaluation},\n  author    = {Ahmed, Sadif and Rahman, Md Nafiu and Wahab, Zahin and Uddin, Gias and Shahriyar, Rifat},\n  booktitle = {Proceedings of the 23rd International Conference on Mining Software Repositories},\n  series    = {MSR '26},\n  publisher = {ACM},\n  year      = {2026},\n  month     = apr,\n  pages     = {169--180},\n  doi       = {10.1145/3793302.3793348}\n}"
       },
       {
         "title": "Secret Breach Detection in Source Code with Large Language Models",
@@ -98,7 +101,8 @@
         "codeLink": "https://github.com/nafiurahman00/Source-Code-Secret-Detection-with-LLMs",
         "description": "Background: Leaking sensitive information—such as API keys, tokens, and credentials—in source code remains a persistent security threat. Traditional regex and entropy-based tools often generate high false positives due to limited contextual understanding. Aims: This work aims to enhance secret detection in source code using large language models (LLMs), reducing false positives while maintaining high recall. We also evaluate the feasibility of using fine-tuned, smaller models for local deployment. Method: We propose a hybrid approach combining regex-based candidate extraction with LLM-based classification. We evaluate pre-trained and fine-tuned variants of various Large Language Models on a benchmark dataset from 818 GitHub repositories. Various prompting strategies and efficient fine-tuning methods are employed for both binary and multiclass classification. Results: The fine-tuned LLaMA-3.1 8B model achieved an F1-score of 0.9852 in binary classification, outperforming regex-only baselines. For multiclass classification, Mistral-7B reached 0.982 accuracy. Fine-tuning significantly improved performance across all models. Conclusions: Fine-tuned LLMs offer an effective and scalable solution for secret detection, greatly reducing false positives. Open-source models provide a practical alternative to commercial APIs, enabling secure and cost-efficient deployment in development workflows.",
         "year": "2025",
-        "status": "Accepted"
+        "status": "Accepted",
+        "bibtex": "@inproceedings{rahman2025secretbreach,\n  title     = {Secret Breach Detection in Source Code with Large Language Models},\n  author    = {Rahman, Md Nafiu and Ahmed, Sadif and Wahab, Zahin and Sohan, S. M. and Shahriyar, Rifat},\n  booktitle = {2025 ACM/IEEE International Symposium on Empirical Software Engineering and Measurement (ESEM)},\n  publisher = {IEEE},\n  year      = {2025},\n  month     = oct,\n  pages     = {207--217},\n  doi       = {10.1109/ESEM64174.2025.00021}\n}"
       }
     ],
     "workshopPapers": [
@@ -111,7 +115,8 @@
         "preprintLink": "https://arxiv.org/abs/2512.19122",
         "description": "We introduce BanglaForge, a new framework designed to generate executable code from Bangla language descriptions, addressing the challenges of a low-resource setting. Our approach employs a retrieval-augmented dual-model collaboration paradigm with iterative self-refinement guided by execution feedback. By integrating LLM-based translation and in-context learning, the system achieves a strong Pass@1 accuracy of 84.00% on the BLP-2025 Bangla Code Generation benchmark, demonstrating the effectiveness of our method for low-resource code generation.",
         "year": "2025",
-        "status": "Accepted"
+        "status": "Accepted",
+        "bibtex": "@inproceedings{dihan-etal-2025-teamb2b,\n  title     = {{T}eam{B}2{B} at {BLP}-2025 Task 2: {B}angla{F}orge: {LLM} Collaboration with Self-Refinement for {B}angla Code Generation},\n  author    = {Dihan, Mahir Labib and Ahmed, Sadif and Rahman, Md Nafiu},\n  booktitle = {Proceedings of the Second Workshop on {B}angla Language Processing ({BLP}-2025)},\n  month     = dec,\n  year      = {2025},\n  address   = {Mumbai, India},\n  publisher = {Association for Computational Linguistics},\n  pages     = {642--655},\n  doi       = {10.18653/v1/2025.banglalp-1.66},\n  url       = {https://aclanthology.org/2025.banglalp-1.66/}\n}"
       }
     ],
     "journalPapers": [
@@ -120,10 +125,12 @@
         "authors": "Asif Shahriar*, Md Nafiu Rahman*, Sadif Ahmed*, Farig Sadeque, Md Rizwan Parvez",
         "venue": "Transactions on Machine Learning Research (TMLR 2026)",
         "Link": "https://openreview.net/forum?id=Od4ZnAUv9T",
-        "pdfLink": "https://arxiv.org/pdf/2510.06445v4",
         "description": "LLM-based agents are now used throughout cybersecurity. On one hand, these agents enable powerful and autonomous security applications. On the other hand, they open new attack surfaces, prompting the security community to build defenses. As the literature in this domain grows rapidly, there is a lack of a holistic study that explains how agents are used in downstream cybersecurity applications, inherent threats to agentic systems, and countermeasures designed to protect them. In this work we present the first holistic survey of the agentic security landscape, structuring the field around the fundamental pillars of Applications, Threats and Defenses. We provide a comprehensive taxonomy of 274 papers that covers red-teaming, blue-teaming and domain-specific applications, attack surfaces on agentic systems, defense techniques, and both offensive and defensive evaluation frameworks. For each pillar, we first discuss the literature around the taxonomy and then perform a quantitative analysis to understand the patterns across these works. For the applications, we show their security-lifecycle coverage map, compare between red-teaming and blue-teaming agents, and analyze the adversarial use of red-teaming applications. On the threat side, we analyze the entry points and agent-loop stages that attacks target, their specificity to the agentic setting, and the threat models they assume. On the defense side, we analyze the prevailing defense strategies, their cost and security trade-offs, and where in the agent lifecycle they are deployed. Finally, we provide a detailed cross-cutting analysis, where we map which defenses cover which attack classes and chart trends in agent architecture, backbone model usage, and data modality coverage. Taken together, these findings give a researcher a structural understanding of how agentic capabilities, vulnerabilities, and countermeasures relate to one another, and to identify where the field is concentrated and where it is thin. A complete and continuously updated list of all surveyed papers is publicly available at https://github.com/kagnlp/Awesome-Agentic-Security.",
         "year": "2026",
-        "status": "Accepted"
+        "status": "Accepted",
+        "preprintLink": "https://arxiv.org/abs/2510.06445",
+        "codeLink": "https://github.com/kagnlp/Awesome-Agentic-Security",
+        "bibtex": "@article{shahriar2026a,\n  title   = {A Survey on Agentic Security: Applications, Threats and Defenses},\n  author  = {Shahriar, Asif and Rahman, Md Nafiu and Ahmed, Sadif and Sadeque, Farig and Parvez, Md Rizwan},\n  journal = {Transactions on Machine Learning Research},\n  issn    = {2835-8856},\n  year    = {2026},\n  url     = {https://openreview.net/forum?id=Od4ZnAUv9T}\n}"
       }
     ],
     "manuscriptsUnderReview": [
@@ -134,7 +141,8 @@
         "preprintLink": "https://arxiv.org/abs/2610.33708",
         "description": "Code coverage reports what tests execute, not whether tests detect faults. Checked coverage addresses this gap by tracing code that influences test oracles through dynamic slicing, but slicing is costly, and Java slicers struggle with modern language features and complex programs. We present Veritas, a slicing-free approach that directly tests whether covered behavior is checked. We target object branch coverage (OBC), a compiled-code structural criterion with fault-detection effectiveness comparable to source-level Modified Condition/Decision Coverage (MC/DC), which is required at the highest assurance level of DO-178C. For each covered object-branch outcome, Veritas forces the opposite outcome and credits checking only when the change is executed, a previously passing test fails, and the failure is attributable to that outcome. Thus, Veritas distinguishes execution from demonstrated fault detection without dynamic dependence analysis. We evaluated Veritas on eleven open-source Java projects containing 51,382 object-branch outcomes. We find that 18% of covered outcomes can be changed without failing any test, exposing weaknesses hidden by coverage. Among surviving mutants, about half are never activated by test inputs, while the rest are activated but undetected. Compared with slicing-based checked coverage, Veritas identifies 4,763 cases where tests detect a change that slicing does not credit, while 19% of cases credited by slicing produce no detected failure when changed. Weakening assertions increases this gap and reduces fault detection in every project. Moreover, code locations controlled by weakly checked outcomes are 12.4-54.7 percentage points more likely to have an undetected independent fault than locations controlled by checked outcomes. These findings show that directly testing outcomes provides actionable evidence of oracle effectiveness beyond structural coverage.",
         "year": "2026",
-        "status": "Under Review"
+        "status": "Under Review",
+        "bibtex": "@misc{rahman2026covered,\n  title         = {Covered Is Not Checked: Which Branch Outcomes Would Your Tests Notice?},\n  author        = {Rahman, Md Nafiu and Canbaz, Cemil and Hossain, Soneya Binta},\n  year          = {2026},\n  eprint        = {2610.33708},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.SE},\n  url           = {https://arxiv.org/abs/2610.33708}\n}"
       },
       {
         "title": "AgentTell: Behavioural Side-Channel Leakage in Browser-Use Agents",
@@ -143,7 +151,9 @@
         "preprintLink": "https://arxiv.org/abs/2609.32915",
         "description": "Browser-use agents often carry information in their context as they move between websites. While it may be necessary for task completion, it also creates a privacy risk, especially when the information contains a private fact regarding the user. For example, an agent may learn a user's affiliation after reading a membership record. If it later selects a registration option specific to that affiliation on another website instead of a general option, the information gets leaked. In this work, we define and study behavioural side-channel leakage in browser-use agents, where an agent's actions inadvertently reveal private information (secret) retained from a prior website, despite an explicit instruction not to disclose it. We introduce AgentTell, a benchmark of 20 scenarios and 100 tasks in which an agent acquires a secret on one website and then completes a task on another website that offers secret-specific actions alongside a general action that reveals nothing. Our evaluation across 9,760 sessions on six backbones shows that agents carrying a secret reveal it through their actions in 61.1% of sessions. Even when agents explicitly state in memory that the secret must not be shared, they still reveal it in 56.7% of those sessions. Moreover, in 34.5% of leaking sessions, their final responses falsely assure users that the secret was not disclosed. These findings show that agents often fail to recognize side-channel leakage as a privacy risk.",
         "year": "2026",
-        "status": "Under Review"
+        "status": "Under Review",
+        "codeLink": "https://github.com/kagnlp/AgentTell",
+        "bibtex": "@misc{shahriar2026agenttell,\n  title         = {AgentTell: Behavioural Side-Channel Leakage in Browser-Use Agents},\n  author        = {Shahriar, Asif and Rahman, Md Nafiu and Ahmed, Sadif and Sadeque, Farig and Parvez, Md Rizwan},\n  year          = {2026},\n  eprint        = {2609.32915},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CR},\n  url           = {https://arxiv.org/abs/2609.32915}\n}"
       },
       {
         "title": "From Codebases to LLMs: Non-Inclusive Naming in Linux Foundation Repositories",
@@ -152,30 +162,33 @@
         "preprintLink": "https://arxiv.org/abs/2607.02772",
         "description": "Since 2020, the Linux Foundation and the multi-organization Inclusive Naming Initiative (INI) have encouraged open-source projects to replace non-inclusive terms such as master/slave and whitelist/blacklist. We present NISCAN, a multilingual static-analysis framework that detects non-inclusive terminology across source code and related software artifacts using the INI vocabulary. Using NISCAN, we conduct the first ecosystem-scale study of inclusive naming across 461 Linux Foundation repositories and show substantial progress since 2020 with lingering terminology residue across documentation, comments, configuration files, and other artifacts. We also show that historical naming decisions remain embedded in large language model predictions even after identifiers have been renamed.",
         "year": "2026",
-        "status": "Under Review"
+        "status": "Under Review",
+        "bibtex": "@misc{tan2026noninclusive,\n  title         = {From Codebases to LLMs: Non-Inclusive Naming in Linux Foundation Repositories},\n  author        = {Tan, Honghao and Rahman, Md Nafiu and Tan, Shin Hwei},\n  year          = {2026},\n  eprint        = {2607.02772},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.SE},\n  url           = {https://arxiv.org/abs/2607.02772}\n}"
       },
       {
-        "title": "Explainable Transformer-CNN Hybrid for Modeling Brain Aging from MRI Images",
-        "authors": "Wasif Jalal, Md Nafiu Rahman, Md Sohel Rahman",
+        "title": "Transformer-ResNet Hybrid for Explainable Modeling of Brain Aging from 3D sMRI",
+        "authors": "Wasif Jalal, Md Nafiu Rahman, Atif Hasan Rahman, Md Sohel Rahman",
         "Link": "https://arxiv.org/abs/2511.15188",
         "preprintLink": "https://arxiv.org/abs/2511.15188",
         "codeLink": "https://github.com/wjalal/cse472_DL_project",
         "description": "Accurate brain age estimation from structural MRI is a valuable biomarker for studying aging and neurodegeneration. Traditional regression and CNN-based methods face limitations such as manual feature engineering, limited receptive fields, and overfitting on heterogeneous data. Pure transformer models, while effective, require large datasets and high computational cost. We propose Brain ResNet over trained Vision Transformer (BrainRotViT), a hybrid architecture that combines the global context modeling of vision transformers (ViT) with the local refinement of residual CNNs. A ViT encoder is first trained on an auxiliary age and sex classification task to learn slice-level features. The frozen encoder is then applied to all sagittal slices to generate a 2D matrix of embedding vectors, which is fed into a residual CNN regressor that incorporates subject sex at the final fully-connected layer to estimate continuous brain age. Our method achieves an MAE of 3.34 years (Pearson r=0.98, Spearman \rho=0.97, R^2=0.95) on validation across 11 MRI datasets encompassing more than 130 acquisition sites, outperforming baseline and state-of-the-art models. It also generalizes well across 4 independent cohorts with MAEs between 3.77 and 5.04 years. Analyses on the brain age gap (the difference between the predicted age and actual age) show that aging patterns are associated with Alzheimer's disease, cognitive impairment, and autism spectrum disorder. Model attention maps highlight aging-associated regions of the brain, notably the cerebellar vermis, precentral and postcentral gyri, temporal lobes, and medial superior frontal gyrus. Our results demonstrate that this method provides an efficient, interpretable, and generalizable framework for brain-age prediction, bridging the gap between CNN- and transformer-based approaches while opening new avenues for aging and neurodegeneration research.",
         "year": "2025",
-        "status": "Under Review"
+        "status": "Under Review",
+        "bibtex": "@misc{jalal2026brainrotvit,\n  title         = {BrainRotViT: Transformer-ResNet Hybrid for Explainable Modeling of Brain Aging from 3D sMRI},\n  author        = {Jalal, Wasif and Rahman, Md Nafiu and Rahman, Atif Hasan and Rahman, M. Sohel},\n  year          = {2026},\n  eprint        = {2511.15188},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CV},\n  url           = {https://arxiv.org/abs/2511.15188}\n}"
       }
     ],
     "manuscriptsUnderPreparation": [],
     "preprints": [
       {
-        "title": "EVCC: Enhanced Vision Transformer-ConvNeXt-CoAtNet Fusion with Adaptive Routing for Classification",
-        "authors": "Kazi Reyazul Hasan, Md Nafiu Rahman, Sadif Ahmed, Wasif Jalal, Shahriar Raj, Mubasshira Musarrat, Muhammad Abdullah Adnan",
+        "title": "EVCC: Enhanced Vision Transformer-ConvNeXt-CoAtNet Fusion for Classification",
+        "authors": "Kazi Reyazul Hasan, Md Nafiu Rahman, Wasif Jalal, Sadif Ahmed, Shahriar Raj, Mubasshira Musarrat, Muhammad Abdullah Adnan",
         "Link": "https://arxiv.org/abs/2511.18691",
         "preprintLink": "https://arxiv.org/abs/2511.18691",
         "codeLink": "https://github.com/kreyazulh/EVCC",
         "description": "Hybrid vision architectures combining Transformers and CNNs have significantly advanced image classification, but they usually do so at significant computational cost. We introduce EVCC (Enhanced Vision Transformer-ConvNeXt-CoAtNet), a novel multi-branch architecture integrating the Vision Transformer, lightweight ConvNeXt, and CoAtNet through key innovations: (1) adaptive token pruning with information preservation, (2) gated bidirectional cross-attention for enhanced feature refinement, (3) auxiliary classification heads for multi-task learning, and (4) a dynamic router gate employing context-aware confidence-driven weighting. Experiments across the CIFAR-100, Tobacco3482, CelebA, and Brain Cancer datasets demonstrate EVCC's superiority over powerful models like DeiT-Base, MaxViT-Base, and CrossViT-Base by consistently achieving state-of-the-art accuracy with improvements of up to 2 percentage points, while reducing FLOPs by 25 to 35%. Our adaptive architecture adjusts computational demands to deployment needs by dynamically reducing token count, efficiently balancing the accuracy-efficiency trade-off while combining global context, local details, and hierarchical features for real-world applications. The source code of our implementation is available at https://anonymous.4open.science/r/EVCC",
         "year": "2025",
-        "status": "Preprint"
+        "status": "Preprint",
+        "bibtex": "@misc{hasan2025evcc,\n  title         = {EVCC: Enhanced Vision Transformer-ConvNeXt-CoAtNet Fusion for Classification},\n  author        = {Hasan, Kazi Reyazul and Rahman, Md Nafiu and Jalal, Wasif and Ahmed, Sadif and Raj, Shahriar and Musarrat, Mubasshira and Adnan, Muhammad Abdullah},\n  year          = {2025},\n  eprint        = {2511.18691},\n  archivePrefix = {arXiv},\n  primaryClass  = {cs.CV},\n  url           = {https://arxiv.org/abs/2511.18691}\n}"
       }
     ]
   },
@@ -482,6 +495,145 @@
       "title": "Joined BRAC University as a Lecturer",
       "description": "Joined the Department of Computer Science and Engineering at BRAC University as a full-time Lecturer.",
       "link": "https://bracu.ac.bd/"
+    }
+  ],
+  "opensource": [
+    {
+      "repo": "betterleaks/betterleaks",
+      "url": "https://github.com/betterleaks/betterleaks",
+      "description": "Find leaked secrets everywhere.",
+      "contributions": [
+        {
+          "text": "Added detection rules for Anthropic OAuth access and refresh tokens (from Claude subscription logins), which no existing rule matched",
+          "pr": 480,
+          "url": "https://github.com/betterleaks/betterleaks/pull/480",
+          "status": "merged"
+        },
+        {
+          "text": "Removed the stopword list from the generic API key rule, which dropped random keys that happened to contain a common word; on 200 random keys with an embedded word, detections rose from 33 to 126",
+          "pr": 483,
+          "url": "https://github.com/betterleaks/betterleaks/pull/483",
+          "issue": 481,
+          "issueUrl": "https://github.com/betterleaks/betterleaks/issues/481",
+          "status": "merged"
+        }
+      ]
+    },
+    {
+      "repo": "coveragepy/coveragepy",
+      "url": "https://github.com/coveragepy/coveragepy",
+      "description": "The code coverage tool for Python.",
+      "contributions": [
+        {
+          "text": "Fixed a crash on Python 3.14 with the pytrace core and branch coverage, where the return after an except* handler recorded a None line and broke saving and reporting",
+          "pr": 2403,
+          "url": "https://github.com/coveragepy/coveragepy/pull/2403",
+          "status": "merged"
+        }
+      ]
+    },
+    {
+      "repo": "PyCQA/flake8-bugbear",
+      "url": "https://github.com/PyCQA/flake8-bugbear",
+      "description": "A Flake8 plugin for finding likely bugs and design problems in Python programs.",
+      "contributions": [
+        {
+          "text": "Fixed B040 false positives when a caught exception with an added note is logged through logger.exception(), exc_info=True or the traceback helpers",
+          "pr": 632,
+          "url": "https://github.com/PyCQA/flake8-bugbear/pull/632",
+          "status": "merged"
+        },
+        {
+          "text": "Follow-up from review: fut.exception() and exc_info=False are no longer treated as handling the exception",
+          "pr": 637,
+          "url": "https://github.com/PyCQA/flake8-bugbear/pull/637",
+          "status": "merged"
+        }
+      ]
+    },
+    {
+      "repo": "boxed/mutmut",
+      "url": "https://github.com/boxed/mutmut",
+      "description": "A mutation testing system for Python.",
+      "contributions": [
+        {
+          "text": "Re-run cached mutants when test files are edited, added or deleted, by storing a hash of each test file, so weakening a test no longer leaves its mutants reported as killed",
+          "pr": 635,
+          "url": "https://github.com/boxed/mutmut/pull/635",
+          "status": "open"
+        },
+        {
+          "text": "Remove deleted test files from the mutants/ copy so stale tests stop killing mutants",
+          "pr": 636,
+          "url": "https://github.com/boxed/mutmut/pull/636",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "repo": "pylint-dev/astroid",
+      "url": "https://github.com/pylint-dev/astroid",
+      "description": "The Python source code representation behind pylint.",
+      "contributions": [
+        {
+          "text": "Stopped call-site inference from unpacking an empty list literal that is later filled by append or extend, which caused no-value-for-parameter false positives in pylint",
+          "pr": 3478,
+          "url": "https://github.com/pylint-dev/astroid/pull/3478",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "repo": "catchorg/Catch2",
+      "url": "https://github.com/catchorg/Catch2",
+      "description": "A modern, C++-native test framework for unit tests, TDD and BDD.",
+      "contributions": [
+        {
+          "text": "Fixed test discovery under Emscripten by reading the test listing from stdout, so builds and ctest runs no longer fail",
+          "pr": 3242,
+          "url": "https://github.com/catchorg/Catch2/pull/3242",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "repo": "huggingface/datasets",
+      "url": "https://github.com/huggingface/datasets",
+      "description": "The largest hub of ready-to-use datasets for AI models, with efficient data manipulation tools.",
+      "contributions": [
+        {
+          "text": "Fixed to_json silently writing wrong values for fixed-shape Array2D to Array5D columns",
+          "pr": 9081,
+          "url": "https://github.com/huggingface/datasets/pull/9081",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "repo": "browser-use/browser-use",
+      "url": "https://github.com/browser-use/browser-use",
+      "description": "An open-source Python library for AI browser agents.",
+      "contributions": [
+        {
+          "text": "Priced OpenRouter requests from the cost OpenRouter reports, instead of leaving it empty for unlisted models, and added a per-request cost breakdown",
+          "pr": 6393,
+          "url": "https://github.com/browser-use/browser-use/pull/6393",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "repo": "iitzco/deepbrain",
+      "url": "https://github.com/iitzco/deepbrain",
+      "description": "Deep learning tools for brain medical images.",
+      "contributions": [
+        {
+          "text": "Made the brain extractor work with TensorFlow 2.x",
+          "pr": 21,
+          "url": "https://github.com/iitzco/deepbrain/pull/21",
+          "status": "open"
+        }
+      ]
     }
   ]
 }
